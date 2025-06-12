@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { useRoutes, Routes, Route, useSearchParams } from "react-router-dom";
 import Home from "./components/home";
-// import PatientOnboarding from "./components/PatientOnboarding";
+import PatientOnboarding from "./components/PatientOnboarding";
 import AssessmentDashboard from "./components/AssessmentDashboard";
 import TreatmentPlanCreator from "./components/TreatmentPlanCreator";
 import PatientProgressTracker from "./components/PatientProgressTracker";
@@ -54,7 +54,7 @@ function App() {
             <Route path="/tempobook/*" element={<div />} />
           )}
           <Route path="/" element={<Home />} />
-          {/* <Route path="/patient-onboarding" element={<PatientOnboarding />} /> */}
+          <Route path="/patient-onboarding" element={<PatientOnboarding />} />
           <Route path="/assessment" element={<AssessmentDashboard />} />
           <Route path="/treatment-plan" element={<TreatmentPlanCreator />} />
           <Route

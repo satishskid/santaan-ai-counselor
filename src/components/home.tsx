@@ -187,20 +187,7 @@ const Home = () => {
             <Activity className="mr-3 h-5 w-5" />
             Patient Mobile App
           </Link>
-          <Link
-            to="/dashboard"
-            className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors"
-          >
-            <Activity className="mr-3 h-5 w-5" />
-            Real-Time Dashboard
-          </Link>
-          <Link
-            to="/patient-app"
-            className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors"
-          >
-            <Activity className="mr-3 h-5 w-5" />
-            Patient Mobile App
-          </Link>
+
         </nav>
 
         <div className="pt-4 border-t border-white/20">
