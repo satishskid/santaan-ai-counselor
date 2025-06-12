@@ -1,76 +1,117 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-  @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 222.2 84% 4.9%;
+@layer base {
+  :root {
+    /* Santaan.in Theme Colors */
+    --background: 0 0% 100%;
+    --foreground: 210 11% 15%; /* Dark gray for text */
 
-      --card: 0 0% 100%;
-      --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 11% 15%;
 
-      --popover: 0 0% 100%;
-      --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11% 15%;
 
-      --primary: 222.2 47.4% 11.2%;
-      --primary-foreground: 210 40% 98%;
+    --primary: 187 100% 33%; /* Santaan Teal #00A6B8 */
+    --primary-foreground: 0 0% 100%;
 
-      --secondary: 210 40% 96.1%;
-      --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 14 100% 60%; /* Santaan Orange #FF6B35 */
+    --secondary-foreground: 0 0% 100%;
 
-      --muted: 210 40% 96.1%;
-      --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 17% 97%; /* Light gray background */
+    --muted-foreground: 215 14% 42%; /* Medium gray text */
 
-      --accent: 210 40% 96.1%;
-      --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 212 83% 57%; /* Santaan Blue #4A90E2 */
+    --accent-foreground: 0 0% 100%;
 
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 210 40% 98%;
+    --destructive: 354 70% 54%; /* Red for errors */
+    --destructive-foreground: 0 0% 100%;
 
-      --border: 214.3 31.8% 91.4%;
-      --input: 214.3 31.8% 91.4%;
-      --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%; /* Light border */
+    --input: 220 13% 91%;
+    --ring: 187 100% 33%; /* Santaan Teal for focus rings */
 
-      --radius: 0.5rem;
-    }
-
-    .dark {
-      --background: 222.2 84% 4.9%;
-      --foreground: 210 40% 98%;
-
-      --card: 222.2 84% 4.9%;
-      --card-foreground: 210 40% 98%;
-
-      --popover: 222.2 84% 4.9%;
-      --popover-foreground: 210 40% 98%;
-
-      --primary: 210 40% 98%;
-      --primary-foreground: 222.2 47.4% 11.2%;
-
-      --secondary: 217.2 32.6% 17.5%;
-      --secondary-foreground: 210 40% 98%;
-
-      --muted: 217.2 32.6% 17.5%;
-      --muted-foreground: 215 20.2% 65.1%;
-
-      --accent: 217.2 32.6% 17.5%;
-      --accent-foreground: 210 40% 98%;
-
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 210 40% 98%;
-
-      --border: 217.2 32.6% 17.5%;
-      --input: 217.2 32.6% 17.5%;
-      --ring: 212.7 26.8% 83.9%;
-    }
+    --radius: 0.75rem; /* Slightly more rounded for modern look */
   }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
+  .dark {
+    --background: 210 11% 15%;
+    --foreground: 0 0% 98%;
+
+    --card: 210 11% 15%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 210 11% 15%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 187 100% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 14 100% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 11% 20%;
+    --muted-foreground: 215 14% 65%;
+
+    --accent: 212 83% 57%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 354 70% 54%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 11% 20%;
+    --input: 210 11% 20%;
+    --ring: 187 100% 33%;
   }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+}
+
+/* Santaan Brand Utilities */
+@layer utilities {
+  .bg-santaan-primary { background-color: #00A6B8; }
+  .bg-santaan-secondary { background-color: #FF6B35; }
+  .bg-santaan-tertiary { background-color: #4A90E2; }
+  .bg-santaan-success { background-color: #28A745; }
+  .bg-santaan-warning { background-color: #FFC107; }
+  .bg-santaan-danger { background-color: #DC3545; }
+
+  .text-santaan-primary { color: #00A6B8; }
+  .text-santaan-secondary { color: #FF6B35; }
+  .text-santaan-tertiary { color: #4A90E2; }
+  .text-santaan-success { color: #28A745; }
+  .text-santaan-warning { color: #FFC107; }
+  .text-santaan-danger { color: #DC3545; }
+
+  .border-santaan-primary { border-color: #00A6B8; }
+  .border-santaan-secondary { border-color: #FF6B35; }
+
+  /* Santaan Gradients */
+  .bg-gradient-santaan-primary {
+    background: linear-gradient(135deg, #00A6B8 0%, #4A90E2 100%);
+  }
+  .bg-gradient-santaan-secondary {
+    background: linear-gradient(135deg, #FF6B35 0%, #FFC107 100%);
+  }
+  .bg-gradient-santaan-success {
+    background: linear-gradient(135deg, #28A745 0%, #20C997 100%);
+  }
+
+  /* Santaan Shadows */
+  .shadow-santaan {
+    box-shadow: 0 4px 6px -1px rgba(0, 166, 184, 0.1), 0 2px 4px -1px rgba(0, 166, 184, 0.06);
+  }
+  .shadow-santaan-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 166, 184, 0.1), 0 4px 6px -2px rgba(0, 166, 184, 0.05);
+  }
+}

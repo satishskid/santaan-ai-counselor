@@ -18,38 +18,62 @@ module.exports = {
     },
     extend: {
       colors: {
+        // Santaan.in Brand Colors
+        santaan: {
+          primary: "#00A6B8", // Teal/Turquoise - main brand color
+          secondary: "#FF6B35", // Orange - accent color
+          tertiary: "#4A90E2", // Blue - supporting color
+          success: "#28A745", // Green for success states
+          warning: "#FFC107", // Yellow for warnings
+          danger: "#DC3545", // Red for errors
+          light: "#F8F9FA", // Light background
+          dark: "#2C3E50", // Dark text
+          gray: {
+            50: "#F8F9FA",
+            100: "#E9ECEF",
+            200: "#DEE2E6",
+            300: "#CED4DA",
+            400: "#ADB5BD",
+            500: "#6C757D",
+            600: "#495057",
+            700: "#343A40",
+            800: "#212529",
+            900: "#1A1D20"
+          }
+        },
+        // Keep existing shadcn colors but update with Santaan theme
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#00A6B8", // Santaan primary
+          foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "#FF6B35", // Santaan secondary
+          foreground: "#FFFFFF",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "#DC3545",
+          foreground: "#FFFFFF",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "#F8F9FA",
+          foreground: "#6C757D",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "#4A90E2",
+          foreground: "#FFFFFF",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "#FFFFFF",
+          foreground: "#212529",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "#FFFFFF",
+          foreground: "#212529",
         },
       },
       borderRadius: {

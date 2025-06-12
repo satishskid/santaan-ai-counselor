@@ -1,10 +1,20 @@
 import { Suspense } from "react";
 import { useRoutes, Routes, Route, useSearchParams } from "react-router-dom";
 import Home from "./components/home";
-import PatientOnboarding from "./components/PatientOnboarding";
+// import PatientOnboarding from "./components/PatientOnboarding";
 import AssessmentDashboard from "./components/AssessmentDashboard";
 import TreatmentPlanCreator from "./components/TreatmentPlanCreator";
 import PatientProgressTracker from "./components/PatientProgressTracker";
+import UserManual from "./components/UserManual";
+import ResourceHub from "./components/ResourceHub";
+import AdminDashboard from "./components/AdminDashboard";
+import AIPersonaGenerator from "./components/AIPersonaGenerator";
+import WorkflowIntegration from "./components/WorkflowIntegration";
+import APISetupGuide from "./components/APISetupGuide";
+import LiveAPIDemo from "./components/LiveAPIDemo";
+import RealTimeDashboard from "./components/RealTimeDashboard";
+import PatientApp from "./components/PatientApp";
+import PatientLinkGenerator from "./components/PatientLinkGenerator";
 import routes from "tempo-routes";
 
 // Wrapper component to handle patient parameter
@@ -44,22 +54,29 @@ function App() {
             <Route path="/tempobook/*" element={<div />} />
           )}
           <Route path="/" element={<Home />} />
-          <Route path="/patient-onboarding" element={<PatientOnboarding />} />
+          {/* <Route path="/patient-onboarding" element={<PatientOnboarding />} /> */}
           <Route path="/assessment" element={<AssessmentDashboard />} />
           <Route path="/treatment-plan" element={<TreatmentPlanCreator />} />
           <Route
             path="/progress-tracker"
             element={<PatientProgressTrackerWrapper />}
           />
-          <Route
-            path="/resources"
-            element={
-              <div className="p-6">
-                <h1 className="text-2xl font-bold">Resource Hub</h1>
-                <p className="text-muted-foreground">Coming soon...</p>
-              </div>
-            }
-          />
+          <Route path="/resources" element={<ResourceHub />} />
+          <Route path="/user-manual" element={<UserManual />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/ai-persona" element={<AIPersonaGenerator patientData={{
+            personalInfo: {},
+            medicalHistory: {},
+            fertilityJourney: {},
+            assessmentResults: {}
+          }} />} />
+          <Route path="/workflow" element={<WorkflowIntegration />} />
+          <Route path="/api-setup" element={<APISetupGuide />} />
+          <Route path="/live-demo" element={<LiveAPIDemo />} />
+          <Route path="/dashboard" element={<RealTimeDashboard />} />
+          <Route path="/patient-app" element={<PatientApp />} />
+          <Route path="/patient-app/:patientId" element={<PatientApp />} />
+          <Route path="/patient-link-generator" element={<PatientLinkGenerator />} />
         </Routes>
       </>
     </Suspense>

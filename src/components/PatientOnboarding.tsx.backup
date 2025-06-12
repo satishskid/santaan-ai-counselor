@@ -14,6 +14,7 @@ import {
   Map,
   Home,
 } from "lucide-react";
+import BackToHome from "./BackToHome";
 
 import { Button } from "./ui/button";
 import {
@@ -45,6 +46,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Separator } from "./ui/separator";
 import { Progress } from "./ui/progress";
+import { MultiSelect, Option } from "./ui/multi-select";
 
 // Form schemas for each step
 const personalDetailsSchema = z.object({
@@ -61,11 +63,12 @@ const personalDetailsSchema = z.object({
 });
 
 const medicalHistorySchema = z.object({
-  previousTreatments: z.string().optional(),
-  medicalConditions: z.string().optional(),
-  medications: z.string().optional(),
-  allergies: z.string().optional(),
-  familyHistory: z.string().optional(),
+  previousTreatments: z.array(z.string()).default([]),
+  medicalConditions: z.array(z.string()).default([]),
+  medications: z.array(z.string()).default([]),
+  allergies: z.array(z.string()).default([]),
+  familyHistory: z.array(z.string()).default([]),
+  surgicalHistory: z.array(z.string()).default([]),
 });
 
 const fertilityJourneySchema = z.object({
@@ -84,6 +87,138 @@ const treatmentPathwaySchema = z.object({
   timeframe: z.string().min(1, { message: "Please select a timeframe" }),
   additionalNotes: z.string().optional(),
 });
+
+// Medical condition options
+const previousTreatmentOptions: Option[] = [
+  { value: "iui", label: "IUI", description: "Intrauterine Insemination" },
+  { value: "ivf", label: "IVF", description: "In Vitro Fertilization" },
+  { value: "icsi", label: "ICSI", description: "Intracytoplasmic Sperm Injection" },
+  { value: "ovulation-induction", label: "Ovulation Induction", description: "Clomid, Letrozole, or Gonadotropins" },
+  { value: "laparoscopy", label: "Laparoscopic Surgery", description: "Minimally invasive surgery" },
+  { value: "hysteroscopy", label: "Hysteroscopic Surgery", description: "Uterine cavity surgery" },
+  { value: "donor-eggs", label: "Donor Egg Treatment", description: "Using donated eggs" },
+  { value: "donor-sperm", label: "Donor Sperm Treatment", description: "Using donated sperm" },
+  { value: "frozen-embryo", label: "Frozen Embryo Transfer", description: "FET cycle" },
+  { value: "egg-freezing", label: "Egg Freezing", description: "Oocyte cryopreservation" },
+  { value: "sperm-freezing", label: "Sperm Freezing", description: "Sperm cryopreservation" },
+  { value: "embryo-freezing", label: "Embryo Freezing", description: "Embryo cryopreservation" },
+  { value: "pgd-pgs", label: "PGD/PGS", description: "Genetic testing of embryos" },
+  { value: "surrogacy", label: "Surrogacy", description: "Gestational carrier" },
+  { value: "natural-cycle", label: "Natural Cycle IVF", description: "IVF without stimulation" },
+  { value: "mini-ivf", label: "Mini IVF", description: "Minimal stimulation IVF" }
+];
+
+const medicalConditionOptions: Option[] = [
+  { value: "pcos", label: "PCOS", description: "Polycystic Ovary Syndrome" },
+  { value: "endometriosis", label: "Endometriosis", description: "Uterine tissue outside uterus" },
+  { value: "thyroid-hypo", label: "Hypothyroidism", description: "Underactive thyroid" },
+  { value: "thyroid-hyper", label: "Hyperthyroidism", description: "Overactive thyroid" },
+  { value: "diabetes-type1", label: "Type 1 Diabetes", description: "Insulin-dependent diabetes" },
+  { value: "diabetes-type2", label: "Type 2 Diabetes", description: "Non-insulin dependent diabetes" },
+  { value: "gestational-diabetes", label: "Gestational Diabetes", description: "Diabetes during pregnancy" },
+  { value: "autoimmune-lupus", label: "Lupus", description: "Systemic lupus erythematosus" },
+  { value: "autoimmune-ra", label: "Rheumatoid Arthritis", description: "Joint inflammation" },
+  { value: "autoimmune-aps", label: "Antiphospholipid Syndrome", description: "Blood clotting disorder" },
+  { value: "fibroids", label: "Uterine Fibroids", description: "Non-cancerous uterine growths" },
+  { value: "blocked-tubes", label: "Blocked Fallopian Tubes", description: "Tubal factor infertility" },
+  { value: "male-factor", label: "Male Factor Infertility", description: "Sperm-related issues" },
+  { value: "unexplained", label: "Unexplained Infertility", description: "No identifiable cause" },
+  { value: "ovulation-disorders", label: "Ovulation Disorders", description: "Irregular or absent ovulation" },
+  { value: "premature-ovarian", label: "Premature Ovarian Insufficiency", description: "Early menopause" },
+  { value: "diminished-ovarian", label: "Diminished Ovarian Reserve", description: "Low egg count/quality" },
+  { value: "adenomyosis", label: "Adenomyosis", description: "Endometrium in uterine wall" },
+  { value: "polyps", label: "Uterine Polyps", description: "Growths in uterine lining" },
+  { value: "cervical-factor", label: "Cervical Factor", description: "Cervical mucus issues" },
+  { value: "recurrent-miscarriage", label: "Recurrent Pregnancy Loss", description: "Multiple miscarriages" },
+  { value: "implantation-failure", label: "Implantation Failure", description: "Repeated failed implantation" },
+  { value: "genetic-disorders", label: "Genetic Disorders", description: "Inherited conditions" },
+  { value: "cancer-history", label: "Cancer History", description: "Previous cancer treatment" },
+  { value: "hypertension", label: "High Blood Pressure", description: "Elevated blood pressure" },
+  { value: "heart-disease", label: "Heart Disease", description: "Cardiovascular conditions" },
+  { value: "kidney-disease", label: "Kidney Disease", description: "Renal conditions" },
+  { value: "liver-disease", label: "Liver Disease", description: "Hepatic conditions" },
+  { value: "mental-health", label: "Mental Health Conditions", description: "Depression, anxiety, etc." }
+];
+
+const medicationOptions: Option[] = [
+  { value: "metformin", label: "Metformin", description: "For diabetes/PCOS" },
+  { value: "levothyroxine", label: "Levothyroxine", description: "For hypothyroidism" },
+  { value: "insulin", label: "Insulin", description: "For diabetes" },
+  { value: "clomid", label: "Clomiphene Citrate", description: "Ovulation induction" },
+  { value: "letrozole", label: "Letrozole", description: "Ovulation induction" },
+  { value: "gonadotropins", label: "Gonadotropins", description: "FSH/LH injections" },
+  { value: "birth-control", label: "Birth Control Pills", description: "Hormonal contraception" },
+  { value: "progesterone", label: "Progesterone", description: "Hormone supplementation" },
+  { value: "estrogen", label: "Estrogen", description: "Hormone replacement" },
+  { value: "prenatal-vitamins", label: "Prenatal Vitamins", description: "Pregnancy supplements" },
+  { value: "folic-acid", label: "Folic Acid", description: "B vitamin supplement" },
+  { value: "vitamin-d", label: "Vitamin D", description: "Vitamin D supplement" },
+  { value: "coq10", label: "CoQ10", description: "Antioxidant supplement" },
+  { value: "dhea", label: "DHEA", description: "Hormone supplement" },
+  { value: "omega3", label: "Omega-3", description: "Fish oil supplement" },
+  { value: "antidepressants", label: "Antidepressants", description: "Mental health medication" },
+  { value: "anti-anxiety", label: "Anti-anxiety Medication", description: "Anxiety treatment" },
+  { value: "blood-thinners", label: "Blood Thinners", description: "Anticoagulation therapy" },
+  { value: "steroids", label: "Corticosteroids", description: "Anti-inflammatory medication" },
+  { value: "immunosuppressants", label: "Immunosuppressants", description: "Immune system modulators" }
+];
+
+const allergyOptions: Option[] = [
+  { value: "penicillin", label: "Penicillin", description: "Antibiotic allergy" },
+  { value: "sulfa", label: "Sulfa Drugs", description: "Sulfonamide allergy" },
+  { value: "latex", label: "Latex", description: "Natural rubber allergy" },
+  { value: "iodine", label: "Iodine/Contrast Dye", description: "Contrast media allergy" },
+  { value: "aspirin", label: "Aspirin", description: "NSAID allergy" },
+  { value: "codeine", label: "Codeine", description: "Opioid allergy" },
+  { value: "morphine", label: "Morphine", description: "Opioid allergy" },
+  { value: "eggs", label: "Eggs", description: "Food allergy" },
+  { value: "nuts", label: "Tree Nuts", description: "Food allergy" },
+  { value: "peanuts", label: "Peanuts", description: "Food allergy" },
+  { value: "shellfish", label: "Shellfish", description: "Food allergy" },
+  { value: "dairy", label: "Dairy/Milk", description: "Food allergy" },
+  { value: "soy", label: "Soy", description: "Food allergy" },
+  { value: "wheat", label: "Wheat/Gluten", description: "Food allergy" },
+  { value: "environmental", label: "Environmental Allergies", description: "Pollen, dust, etc." },
+  { value: "anesthesia", label: "Anesthesia", description: "Anesthetic allergy" }
+];
+
+const familyHistoryOptions: Option[] = [
+  { value: "infertility", label: "Infertility", description: "Family history of fertility issues" },
+  { value: "miscarriage", label: "Recurrent Miscarriage", description: "Multiple pregnancy losses" },
+  { value: "genetic-disorders", label: "Genetic Disorders", description: "Inherited conditions" },
+  { value: "birth-defects", label: "Birth Defects", description: "Congenital abnormalities" },
+  { value: "cancer-breast", label: "Breast Cancer", description: "Family history of breast cancer" },
+  { value: "cancer-ovarian", label: "Ovarian Cancer", description: "Family history of ovarian cancer" },
+  { value: "cancer-uterine", label: "Uterine Cancer", description: "Family history of uterine cancer" },
+  { value: "cancer-prostate", label: "Prostate Cancer", description: "Family history of prostate cancer" },
+  { value: "diabetes", label: "Diabetes", description: "Family history of diabetes" },
+  { value: "heart-disease", label: "Heart Disease", description: "Cardiovascular disease" },
+  { value: "hypertension", label: "High Blood Pressure", description: "Hypertension" },
+  { value: "thyroid", label: "Thyroid Disorders", description: "Thyroid conditions" },
+  { value: "autoimmune", label: "Autoimmune Disorders", description: "Immune system disorders" },
+  { value: "mental-health", label: "Mental Health", description: "Depression, anxiety, etc." },
+  { value: "blood-clots", label: "Blood Clotting Disorders", description: "Thrombophilia" },
+  { value: "twins", label: "Multiple Births", description: "Twins, triplets, etc." }
+];
+
+const surgicalHistoryOptions: Option[] = [
+  { value: "appendectomy", label: "Appendectomy", description: "Appendix removal" },
+  { value: "gallbladder", label: "Cholecystectomy", description: "Gallbladder removal" },
+  { value: "cesarean", label: "Cesarean Section", description: "C-section delivery" },
+  { value: "d-and-c", label: "D&C", description: "Dilation and curettage" },
+  { value: "laparoscopy", label: "Laparoscopy", description: "Minimally invasive surgery" },
+  { value: "hysteroscopy", label: "Hysteroscopy", description: "Uterine cavity surgery" },
+  { value: "myomectomy", label: "Myomectomy", description: "Fibroid removal" },
+  { value: "ovarian-cyst", label: "Ovarian Cyst Removal", description: "Cystectomy" },
+  { value: "tubal-ligation", label: "Tubal Ligation", description: "Tubes tied" },
+  { value: "tubal-reversal", label: "Tubal Reversal", description: "Tubal ligation reversal" },
+  { value: "endometriosis", label: "Endometriosis Surgery", description: "Endometrial tissue removal" },
+  { value: "hernia", label: "Hernia Repair", description: "Hernia surgery" },
+  { value: "thyroid", label: "Thyroid Surgery", description: "Thyroidectomy" },
+  { value: "breast", label: "Breast Surgery", description: "Breast procedures" },
+  { value: "cardiac", label: "Cardiac Surgery", description: "Heart surgery" },
+  { value: "orthopedic", label: "Orthopedic Surgery", description: "Bone/joint surgery" }
+];
 
 const PatientOnboarding = () => {
   const [step, setStep] = useState(1);
@@ -111,11 +246,12 @@ const PatientOnboarding = () => {
   const medicalHistoryForm = useForm({
     resolver: zodResolver(medicalHistorySchema),
     defaultValues: {
-      previousTreatments: "",
-      medicalConditions: "",
-      medications: "",
-      allergies: "",
-      familyHistory: "",
+      previousTreatments: [],
+      medicalConditions: [],
+      medications: [],
+      allergies: [],
+      familyHistory: [],
+      surgicalHistory: [],
     },
   });
 
@@ -186,55 +322,50 @@ const PatientOnboarding = () => {
 
   return (
     <div className="bg-background min-h-screen p-6">
+      {/* Back to Home Button */}
+      <BackToHome position="top-left" />
+
       <div className="max-w-4xl mx-auto mb-4">
-        <Link
-          to="/"
-          className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
-        >
-          <Home className="mr-2 h-4 w-4" />
-          Back to Dashboard
-        </Link>
-      </div>
-      <Card className="max-w-4xl mx-auto">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold">
-            Patient Onboarding
-          </CardTitle>
-          <CardDescription>
-            Complete the following steps to onboard a new patient to the IVF
-            counseling program.
-          </CardDescription>
-          <div className="mt-4">
-            <Progress value={getProgressPercentage()} className="h-2" />
-            <div className="flex justify-between mt-2 text-sm text-muted-foreground">
-              <div className={`${step >= 1 ? "text-primary font-medium" : ""}`}>
-                Personal Details
-              </div>
-              <div className={`${step >= 2 ? "text-primary font-medium" : ""}`}>
-                Medical History
-              </div>
-              <div className={`${step >= 3 ? "text-primary font-medium" : ""}`}>
-                Fertility Journey
-              </div>
-              <div className={`${step >= 4 ? "text-primary font-medium" : ""}`}>
-                Treatment Pathway
+        <Card className="max-w-4xl mx-auto">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">
+              Patient Onboarding
+            </CardTitle>
+            <CardDescription>
+              Complete the following steps to onboard a new patient to the IVF
+              counseling program.
+            </CardDescription>
+            <div className="mt-4">
+              <Progress value={getProgressPercentage()} className="h-2" />
+              <div className="flex justify-between mt-2 text-sm text-muted-foreground">
+                <div className={`${step >= 1 ? "text-primary font-medium" : ""}`}>
+                  Personal Details
+                </div>
+                <div className={`${step >= 2 ? "text-primary font-medium" : ""}`}>
+                  Medical History
+                </div>
+                <div className={`${step >= 3 ? "text-primary font-medium" : ""}`}>
+                  Fertility Journey
+                </div>
+                <div className={`${step >= 4 ? "text-primary font-medium" : ""}`}>
+                  Treatment Pathway
+                </div>
               </div>
             </div>
-          </div>
-        </CardHeader>
+          </CardHeader>
 
-        <CardContent>
-          {step === 1 && (
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="flex items-center mb-6">
-                <User className="mr-2 h-5 w-5 text-primary" />
-                <h3 className="text-lg font-medium">Personal Details</h3>
-              </div>
+          <CardContent>
+            {step === 1 && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="flex items-center mb-6">
+                  <User className="mr-2 h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-medium">Personal Details</h3>
+                </div>
               <Form {...personalDetailsForm}>
                 <form
                   onSubmit={personalDetailsForm.handleSubmit(
@@ -354,9 +485,9 @@ const PatientOnboarding = () => {
                     </Button>
                   </div>
                 </form>
-              </Form>
-            </motion.div>
-          )}
+                </Form>
+              </motion.div>
+            )}
 
           {step === 2 && (
             <motion.div
@@ -382,53 +513,17 @@ const PatientOnboarding = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Previous Fertility Treatments</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select previous treatments" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="none">
-                              No previous treatments
-                            </SelectItem>
-                            <SelectItem value="iui">
-                              IUI (Intrauterine Insemination)
-                            </SelectItem>
-                            <SelectItem value="ivf">
-                              IVF (In Vitro Fertilization)
-                            </SelectItem>
-                            <SelectItem value="icsi">
-                              ICSI (Intracytoplasmic Sperm Injection)
-                            </SelectItem>
-                            <SelectItem value="ovulation-induction">
-                              Ovulation Induction (Clomid/Letrozole)
-                            </SelectItem>
-                            <SelectItem value="laparoscopy">
-                              Laparoscopic Surgery
-                            </SelectItem>
-                            <SelectItem value="hysteroscopy">
-                              Hysteroscopic Surgery
-                            </SelectItem>
-                            <SelectItem value="donor-eggs">
-                              Donor Egg Treatment
-                            </SelectItem>
-                            <SelectItem value="donor-sperm">
-                              Donor Sperm Treatment
-                            </SelectItem>
-                            <SelectItem value="frozen-embryo">
-                              Frozen Embryo Transfer (FET)
-                            </SelectItem>
-                            <SelectItem value="multiple">
-                              Multiple treatments (combination)
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <FormControl>
+                          <MultiSelect
+                            options={previousTreatmentOptions}
+                            value={field.value}
+                            onChange={field.onChange}
+                            placeholder="Select all previous treatments..."
+                            searchable={true}
+                          />
+                        </FormControl>
                         <FormDescription>
-                          Select the most recent or primary treatment received.
+                          Select all fertility treatments you have tried before. You can select multiple options.
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -439,58 +534,18 @@ const PatientOnboarding = () => {
                     name="medicalConditions"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Relevant Medical Conditions</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select medical conditions" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="none">
-                              No known conditions
-                            </SelectItem>
-                            <SelectItem value="pcos">
-                              PCOS (Polycystic Ovary Syndrome)
-                            </SelectItem>
-                            <SelectItem value="endometriosis">
-                              Endometriosis
-                            </SelectItem>
-                            <SelectItem value="thyroid">
-                              Thyroid Disorders
-                            </SelectItem>
-                            <SelectItem value="diabetes">Diabetes</SelectItem>
-                            <SelectItem value="autoimmune">
-                              Autoimmune Disorders
-                            </SelectItem>
-                            <SelectItem value="fibroids">
-                              Uterine Fibroids
-                            </SelectItem>
-                            <SelectItem value="blocked-tubes">
-                              Blocked Fallopian Tubes
-                            </SelectItem>
-                            <SelectItem value="male-factor">
-                              Male Factor Infertility
-                            </SelectItem>
-                            <SelectItem value="unexplained">
-                              Unexplained Infertility
-                            </SelectItem>
-                            <SelectItem value="ovulation-disorders">
-                              Ovulation Disorders
-                            </SelectItem>
-                            <SelectItem value="premature-ovarian">
-                              Premature Ovarian Insufficiency
-                            </SelectItem>
-                            <SelectItem value="multiple">
-                              Multiple conditions
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <FormLabel>Medical Conditions</FormLabel>
+                        <FormControl>
+                          <MultiSelect
+                            options={medicalConditionOptions}
+                            value={field.value}
+                            onChange={field.onChange}
+                            placeholder="Select all relevant medical conditions..."
+                            searchable={true}
+                          />
+                        </FormControl>
                         <FormDescription>
-                          Select the primary condition affecting fertility.
+                          Select all medical conditions that may affect fertility or treatment. You can select multiple conditions.
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -502,58 +557,19 @@ const PatientOnboarding = () => {
                       name="medications"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Current Medications</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select current medications" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="none">
-                                No current medications
-                              </SelectItem>
-                              <SelectItem value="prenatal-vitamins">
-                                Prenatal Vitamins/Folic Acid
-                              </SelectItem>
-                              <SelectItem value="metformin">
-                                Metformin (for PCOS/Diabetes)
-                              </SelectItem>
-                              <SelectItem value="thyroid-medication">
-                                Thyroid Medication (Levothyroxine)
-                              </SelectItem>
-                              <SelectItem value="birth-control">
-                                Birth Control Pills
-                              </SelectItem>
-                              <SelectItem value="clomid">
-                                Clomid (Clomiphene Citrate)
-                              </SelectItem>
-                              <SelectItem value="letrozole">
-                                Letrozole (Femara)
-                              </SelectItem>
-                              <SelectItem value="progesterone">
-                                Progesterone Supplements
-                              </SelectItem>
-                              <SelectItem value="coq10">
-                                CoQ10 Supplements
-                              </SelectItem>
-                              <SelectItem value="dhea">
-                                DHEA Supplements
-                              </SelectItem>
-                              <SelectItem value="antidepressants">
-                                Antidepressants
-                              </SelectItem>
-                              <SelectItem value="blood-pressure">
-                                Blood Pressure Medication
-                              </SelectItem>
-                              <SelectItem value="multiple">
-                                Multiple medications
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
+                          <FormLabel>Current Medications & Supplements</FormLabel>
+                          <FormControl>
+                            <MultiSelect
+                              options={medicationOptions}
+                              value={field.value}
+                              onChange={field.onChange}
+                              placeholder="Select all current medications..."
+                              searchable={true}
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            Include all medications, supplements, and vitamins you are currently taking.
+                          </FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -564,48 +580,18 @@ const PatientOnboarding = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Allergies</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select allergies" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="none">
-                                No known allergies
-                              </SelectItem>
-                              <SelectItem value="penicillin">
-                                Penicillin
-                              </SelectItem>
-                              <SelectItem value="sulfa">Sulfa drugs</SelectItem>
-                              <SelectItem value="latex">Latex</SelectItem>
-                              <SelectItem value="iodine">
-                                Iodine/Contrast dye
-                              </SelectItem>
-                              <SelectItem value="aspirin">
-                                Aspirin/NSAIDs
-                              </SelectItem>
-                              <SelectItem value="codeine">
-                                Codeine/Opioids
-                              </SelectItem>
-                              <SelectItem value="environmental">
-                                Environmental (pollen, dust)
-                              </SelectItem>
-                              <SelectItem value="food">
-                                Food allergies
-                              </SelectItem>
-                              <SelectItem value="shellfish">
-                                Shellfish
-                              </SelectItem>
-                              <SelectItem value="nuts">Nuts</SelectItem>
-                              <SelectItem value="multiple">
-                                Multiple allergies
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
+                          <FormControl>
+                            <MultiSelect
+                              options={allergyOptions}
+                              value={field.value}
+                              onChange={field.onChange}
+                              placeholder="Select all known allergies..."
+                              searchable={true}
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            Include drug allergies, food allergies, and environmental allergies.
+                          </FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -617,54 +603,39 @@ const PatientOnboarding = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Family Medical History</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select family history" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="none">
-                              No significant family history
-                            </SelectItem>
-                            <SelectItem value="fertility-issues">
-                              Fertility issues in family
-                            </SelectItem>
-                            <SelectItem value="diabetes">Diabetes</SelectItem>
-                            <SelectItem value="heart-disease">
-                              Heart Disease
-                            </SelectItem>
-                            <SelectItem value="cancer">
-                              Cancer (any type)
-                            </SelectItem>
-                            <SelectItem value="breast-cancer">
-                              Breast/Ovarian Cancer
-                            </SelectItem>
-                            <SelectItem value="thyroid">
-                              Thyroid Disorders
-                            </SelectItem>
-                            <SelectItem value="autoimmune">
-                              Autoimmune Disorders
-                            </SelectItem>
-                            <SelectItem value="mental-health">
-                              Mental Health Conditions
-                            </SelectItem>
-                            <SelectItem value="genetic-disorders">
-                              Genetic Disorders
-                            </SelectItem>
-                            <SelectItem value="pregnancy-complications">
-                              Pregnancy Complications
-                            </SelectItem>
-                            <SelectItem value="multiple">
-                              Multiple conditions
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <FormControl>
+                          <MultiSelect
+                            options={familyHistoryOptions}
+                            value={field.value}
+                            onChange={field.onChange}
+                            placeholder="Select relevant family history..."
+                            searchable={true}
+                          />
+                        </FormControl>
                         <FormDescription>
-                          Select the most relevant family medical history.
+                          Include significant medical conditions in immediate family members (parents, siblings, grandparents).
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={medicalHistoryForm.control}
+                    name="surgicalHistory"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Surgical History</FormLabel>
+                        <FormControl>
+                          <MultiSelect
+                            options={surgicalHistoryOptions}
+                            value={field.value}
+                            onChange={field.onChange}
+                            placeholder="Select all previous surgeries..."
+                            searchable={true}
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          Include all surgeries and procedures you have had, especially those related to reproductive health.
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -1072,17 +1043,18 @@ const PatientOnboarding = () => {
               </Form>
             </motion.div>
           )}
-        </CardContent>
+          </CardContent>
 
-        <Separator className="my-2" />
+          <Separator className="my-2" />
 
-        <CardFooter className="flex justify-between">
-          <div className="text-sm text-muted-foreground">Step {step} of 4</div>
-          <Button variant="outline" size="sm" onClick={saveProgress}>
-            <Save className="mr-2 h-4 w-4" /> Save Progress
-          </Button>
-        </CardFooter>
-      </Card>
+          <CardFooter className="flex justify-between">
+            <div className="text-sm text-muted-foreground">Step {step} of 4</div>
+            <Button variant="outline" size="sm" onClick={saveProgress}>
+              <Save className="mr-2 h-4 w-4" /> Save Progress
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 };

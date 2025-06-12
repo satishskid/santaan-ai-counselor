@@ -1,0 +1,239 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String          @id @default(cuid())
+  email               String          @unique
+  fullName            String?
+  role                String          @default("PATIENT")
+  avatarUrl           String?
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  appointments        Appointment[]   @relation("CounselorAppointments")
+  assessments         Assessment[]    @relation("CounselorAssessments")
+  notes               Note[]          @relation("CounselorNotes")
+  patientsAsCounselor Patient[]       @relation("CounselorPatients")
+  patientUser         Patient?        @relation("PatientUser")
+  resources           Resource[]      @relation("CreatedResources")
+  treatmentPlans      TreatmentPlan[] @relation("CounselorPlans")
+
+  @@map("users")
+}
+
+model Patient {
+  id               String            @id @default(cuid())
+  userId           String?           @unique
+  firstName        String
+  lastName         String
+  email            String            @unique
+  phone            String?
+  dateOfBirth      DateTime?
+  gender           String?
+  status           String            @default("NEW")
+  diagnosis        String?
+  stage            String?
+  nextAppointment  DateTime?
+  avatarUrl        String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  counselorId      String?
+  appointments     Appointment[]
+  assessments      Assessment[]
+  fertilityJourney FertilityJourney?
+  medicalHistory   MedicalHistory?
+  notes            Note[]
+  patientResources PatientResource[]
+  counselor        User?             @relation("CounselorPatients", fields: [counselorId], references: [id])
+  user             User?             @relation("PatientUser", fields: [userId], references: [id])
+  treatmentPathway TreatmentPathway?
+  treatmentPlans   TreatmentPlan[]
+
+  @@map("patients")
+}
+
+model MedicalHistory {
+  id                 String   @id @default(cuid())
+  patientId          String   @unique
+  previousTreatments String?
+  medicalConditions  String?
+  medications        String?
+  allergies          String?
+  familyHistory      String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  patient            Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("medical_history")
+}
+
+model FertilityJourney {
+  id                    String   @id @default(cuid())
+  patientId             String   @unique
+  tryingToConceiveSince String?
+  previousIVFAttempts   String?
+  challenges            String?
+  expectations          String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  patient               Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("fertility_journey")
+}
+
+model TreatmentPathway {
+  id                 String   @id @default(cuid())
+  patientId          String   @unique
+  preferredTreatment String?
+  timeframe          String?
+  additionalNotes    String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  patient            Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("treatment_pathway")
+}
+
+model Assessment {
+  id             String    @id @default(cuid())
+  patientId      String
+  counselorId    String?
+  assessmentType String
+  status         String    @default("NOT_STARTED")
+  questions      String?
+  answers        String?
+  score          Int?
+  notes          String?
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  counselor      User?     @relation("CounselorAssessments", fields: [counselorId], references: [id])
+  patient        Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("assessments")
+}
+
+model TreatmentPlan {
+  id            String         @id @default(cuid())
+  patientId     String
+  counselorId   String?
+  title         String
+  description   String?
+  status        String         @default("DRAFT")
+  templateId    String?
+  startDate     DateTime?
+  endDate       DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  interventions Intervention[]
+  milestones    Milestone[]
+  counselor     User?          @relation("CounselorPlans", fields: [counselorId], references: [id])
+  patient       Patient        @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("treatment_plans")
+}
+
+model Milestone {
+  id              String         @id @default(cuid())
+  treatmentPlanId String
+  title           String
+  description     String?
+  targetDate      DateTime?
+  status          String         @default("PENDING")
+  notes           String?
+  completedAt     DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  interventions   Intervention[]
+  treatmentPlan   TreatmentPlan  @relation(fields: [treatmentPlanId], references: [id], onDelete: Cascade)
+
+  @@map("milestones")
+}
+
+model Intervention {
+  id              String        @id @default(cuid())
+  treatmentPlanId String
+  milestoneId     String?
+  title           String
+  description     String?
+  type            String?
+  frequency       String?
+  duration        String?
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  milestone       Milestone?    @relation(fields: [milestoneId], references: [id])
+  treatmentPlan   TreatmentPlan @relation(fields: [treatmentPlanId], references: [id], onDelete: Cascade)
+
+  @@map("interventions")
+}
+
+model Appointment {
+  id              String   @id @default(cuid())
+  patientId       String
+  counselorId     String?
+  title           String
+  description     String?
+  appointmentDate DateTime
+  durationMinutes Int?     @default(60)
+  status          String   @default("SCHEDULED")
+  type            String?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  counselor       User?    @relation("CounselorAppointments", fields: [counselorId], references: [id])
+  patient         Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("appointments")
+}
+
+model Resource {
+  id               String            @id @default(cuid())
+  title            String
+  description      String?
+  type             String
+  url              String?
+  content          String?
+  tags             String?
+  isPublic         Boolean           @default(true)
+  createdById      String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  patientResources PatientResource[]
+  createdBy        User?             @relation("CreatedResources", fields: [createdById], references: [id])
+
+  @@map("resources")
+}
+
+model PatientResource {
+  id         String   @id @default(cuid())
+  patientId  String
+  resourceId String
+  sharedById String?
+  sharedAt   DateTime @default(now())
+  notes      String?
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  patient    Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@unique([patientId, resourceId])
+  @@map("patient_resources")
+}
+
+model Note {
+  id          String   @id @default(cuid())
+  patientId   String
+  counselorId String?
+  content     String
+  isPrivate   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  counselor   User?    @relation("CounselorNotes", fields: [counselorId], references: [id])
+  patient     Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("notes")
+}
