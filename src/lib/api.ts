@@ -1,7 +1,9 @@
 // API layer for frontend-backend communication
 // This provides a clean interface between components and the API server
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+// API base URL - automatically detects environment
+const API_BASE_URL = import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD ? '' : 'http://localhost:3001')
 
 // Types for API responses
 export interface ApiResponse<T> {
@@ -10,12 +12,16 @@ export interface ApiResponse<T> {
   success: boolean
 }
 
-// Helper function to make API calls
+// Helper function to make API calls with authentication
 const apiCall = async <T>(endpoint: string, options?: RequestInit): Promise<ApiResponse<T>> => {
   try {
+    // Get auth token from localStorage
+    const token = localStorage.getItem('accessToken')
+
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       headers: {
         'Content-Type': 'application/json',
+        ...(token && { 'Authorization': `Bearer ${token}` }),
         ...options?.headers,
       },
       ...options,
@@ -23,6 +29,14 @@ const apiCall = async <T>(endpoint: string, options?: RequestInit): Promise<ApiR
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+
+      // Handle authentication errors
+      if (response.status === 401) {
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('user')
+        // Optionally redirect to login
+      }
+
       return {
         data: null,
         error: errorData.error || `HTTP ${response.status}: ${response.statusText}`,
@@ -40,6 +54,75 @@ const apiCall = async <T>(endpoint: string, options?: RequestInit): Promise<ApiR
       success: false,
     }
   }
+}
+
+// Authentication API
+export const authApi = {
+  login: (credentials: { email: string; password: string }) =>
+    apiCall<{ user: any; accessToken: string; message: string }>('/api/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+    }),
+
+  register: (userData: {
+    email: string;
+    password: string;
+    fullName: string;
+    role?: string
+  }) =>
+    apiCall<{ user: any; accessToken: string; message: string }>('/api/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(userData),
+    }),
+
+  logout: () =>
+    apiCall<{ message: string }>('/api/auth/logout', {
+      method: 'POST',
+    }),
+
+  refreshToken: () =>
+    apiCall<{ user: any; accessToken: string; message: string }>('/api/auth/refresh', {
+      method: 'POST',
+    }),
+
+  getProfile: () =>
+    apiCall<{ user: any; message: string }>('/api/auth/me'),
+
+  // Helper functions for token management
+  setToken: (token: string) => {
+    localStorage.setItem('accessToken', token)
+  },
+
+  getToken: () => {
+    return localStorage.getItem('accessToken')
+  },
+
+  removeToken: () => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('user')
+  },
+
+  setUser: (user: any) => {
+    localStorage.setItem('user', JSON.stringify(user))
+  },
+
+  getUser: () => {
+    const user = localStorage.getItem('user')
+    return user ? JSON.parse(user) : null
+  },
+}
+
+// Health Check API
+export const healthApi = {
+  check: () => apiCall<{
+    status: string;
+    timestamp: string;
+    environment: string;
+    version: string;
+    uptime: number;
+    memory: { used: number; total: number };
+    database: { status: string; message: string };
+  }>('/api/health'),
 }
 
 // Patient API
@@ -151,9 +234,12 @@ export const assessmentApi = {
 
 // Treatment Plan API
 export const treatmentPlanApi = {
-  getAll: (patientId?: string) => Promise.resolve({ success: true, data: [], error: null }),
+  getAll: (patientId?: string) => {
+    const url = patientId ? `/api/treatment-plans?patientId=${patientId}` : '/api/treatment-plans'
+    return apiCall<any[]>(url)
+  },
 
-  getById: (id: string) => Promise.resolve({ success: true, data: null, error: null }),
+  getById: (id: string) => apiCall<any>(`/api/treatment-plans/${id}`),
 
   create: (data: {
     patientId: string
@@ -163,11 +249,33 @@ export const treatmentPlanApi = {
     templateId?: string
     startDate?: Date
     endDate?: Date
-  }) => Promise.resolve({ success: true, data, error: null }),
+    milestones?: Array<{
+      title: string
+      description?: string
+      targetDate?: Date
+      notes?: string
+    }>
+    interventions?: Array<{
+      title: string
+      description?: string
+      type?: string
+      frequency?: string
+      duration?: string
+      notes?: string
+    }>
+  }) => apiCall<any>('/api/treatment-plans', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
 
-  update: (id: string, data: any) => Promise.resolve({ success: true, data, error: null }),
+  update: (id: string, data: any) => apiCall<any>(`/api/treatment-plans/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
 
-  delete: (id: string) => Promise.resolve({ success: true, data: null, error: null }),
+  delete: (id: string) => apiCall<any>(`/api/treatment-plans/${id}`, {
+    method: 'DELETE',
+  }),
 }
 
 // Milestone API
