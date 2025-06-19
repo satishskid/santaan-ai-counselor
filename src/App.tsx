@@ -16,6 +16,7 @@ import RealTimeDashboard from "./components/RealTimeDashboard";
 import PatientApp from "./components/PatientApp";
 import PatientLinkGenerator from "./components/PatientLinkGenerator";
 import Settings from "./components/Settings";
+import SystemHealthDashboard from "./components/SystemHealthDashboard";
 // import routes from "tempo-routes"; // Removed for production build
 
 // Wrapper component to handle patient parameter
@@ -77,6 +78,7 @@ function App() {
           <Route path="/patient-app/:patientId" element={<PatientApp />} />
           <Route path="/patient-link-generator" element={<PatientLinkGenerator />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/system-health" element={<SystemHealthDashboard />} />
         </Routes>
       </>
     </Suspense>

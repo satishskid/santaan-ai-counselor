@@ -125,6 +125,20 @@ export const healthApi = {
     memory: { used: number; total: number };
     database: { status: string; message: string };
   }>('/api/health'),
+
+  systemHealth: () => apiCall<{
+    timestamp: string;
+    overall_status: string;
+    response_time: number;
+    components: {
+      database: any;
+      environment: any;
+      api_endpoints: any;
+      system: any;
+    };
+    errors: string[];
+    warnings: string[];
+  }>('/api/system-health'),
 }
 
 // Patient API
