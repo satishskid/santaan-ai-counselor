@@ -75,15 +75,17 @@ export const authApi = {
       body: JSON.stringify(userData),
     }),
 
-  logout: () =>
-    apiCall<{ message: string }>('/api/auth/logout', {
-      method: 'POST',
-    }),
+  logout: () => {
+    // Handle logout locally since we removed the endpoint
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('user')
+    return Promise.resolve({ data: { message: 'Logged out successfully' }, error: null, success: true })
+  },
 
-  refreshToken: () =>
-    apiCall<{ user: any; accessToken: string; message: string }>('/api/auth/refresh', {
-      method: 'POST',
-    }),
+  refreshToken: () => {
+    // Refresh token endpoint removed - handle locally
+    return Promise.resolve({ data: null, error: 'Refresh token not available', success: false })
+  },
 
   getProfile: () =>
     apiCall<{ user: any; message: string }>('/api/auth/me'),
@@ -389,12 +391,19 @@ export const userApi = {
 
 // Dashboard API - aggregated data for dashboard
 export const dashboardApi = {
-  getStats: () => apiCall<{
-    totalPatients: number
-    upcomingAppointments: number
-    activeTreatmentPlans: number
-    completedAssessments: number
-    recentPatients: any[]
-    todaysAppointments: any[]
-  }>('/api/dashboard/stats'),
+  getStats: () => {
+    // Dashboard stats endpoint removed - return mock data for now
+    return Promise.resolve({
+      data: {
+        totalPatients: 0,
+        upcomingAppointments: 0,
+        activeTreatmentPlans: 0,
+        completedAssessments: 0,
+        recentPatients: [],
+        todaysAppointments: []
+      },
+      error: null,
+      success: true
+    })
+  },
 }
