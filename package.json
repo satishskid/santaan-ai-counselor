@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc ; vite build",
-    "postbuild": "npm run db:deploy",
+    "postbuild": "npm run db:deploy:conditional",
     "build-no-errors": "tsc ; vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -17,6 +17,7 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:deploy": "prisma db push && node scripts/setup-production-db.js",
+    "db:deploy:conditional": "node -e \"if(process.env.DATABASE_URL) { require('child_process').execSync('npm run db:deploy', {stdio: 'inherit'}); } else { console.log('Skipping database deployment - DATABASE_URL not set'); }\"",
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "db:reset": "prisma db push --force-reset && npm run db:seed",
@@ -80,6 +81,7 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.8.2",
     "@types/node": "^20.14.2",
+    "@vitejs/plugin-react-swc": "^3.8.1",
     "vaul": "^0.9.1",
     "vite": "^6.2.3",
     "zod": "^3.25.56"
@@ -92,7 +94,6 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-react-swc": "^3.8.1",
     "@vitest/ui": "^3.2.3",
     "autoprefixer": "^10.4.19",
     "concurrently": "^9.1.2",
