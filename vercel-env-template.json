@@ -1,0 +1,62 @@
+{
+  "DATABASE_URL": {
+    "description": "PostgreSQL database connection string with connection pooling",
+    "example": "postgresql://username:password@hostname:port/database?schema=public&pgbouncer=true&connect_timeout=15",
+    "required": true,
+    "source": "Use POSTGRES_PRISMA_URL from Vercel Postgres or connection string from Supabase"
+  },
+  "SHADOW_DATABASE_URL": {
+    "description": "PostgreSQL database connection string for migrations (non-pooled)",
+    "example": "postgresql://username:password@hostname:port/database?schema=public",
+    "required": true,
+    "source": "Use POSTGRES_URL_NON_POOLING from Vercel Postgres or same as DATABASE_URL for Supabase"
+  },
+  "JWT_SECRET": {
+    "description": "Secret key for JWT token signing (minimum 32 characters)",
+    "example": "counselortempo-super-secret-jwt-key-for-production-2024-change-this",
+    "required": true,
+    "source": "Generate a secure random string of at least 32 characters"
+  },
+  "JWT_EXPIRES_IN": {
+    "description": "JWT access token expiration time",
+    "example": "7d",
+    "required": false,
+    "default": "7d"
+  },
+  "REFRESH_TOKEN_EXPIRES_IN": {
+    "description": "JWT refresh token expiration time",
+    "example": "30d",
+    "required": false,
+    "default": "30d"
+  },
+  "NODE_ENV": {
+    "description": "Node.js environment",
+    "example": "production",
+    "required": true,
+    "source": "Set to 'production' for production deployment"
+  },
+  "FRONTEND_URL": {
+    "description": "Frontend application URL for CORS configuration",
+    "example": "https://your-project-name.vercel.app",
+    "required": false,
+    "source": "Your Vercel deployment URL (will be provided after deployment)"
+  },
+  "BCRYPT_ROUNDS": {
+    "description": "Number of rounds for bcrypt password hashing",
+    "example": "12",
+    "required": false,
+    "default": "12"
+  },
+  "RATE_LIMIT_WINDOW_MS": {
+    "description": "Rate limiting window in milliseconds",
+    "example": "900000",
+    "required": false,
+    "default": "900000"
+  },
+  "RATE_LIMIT_MAX_REQUESTS": {
+    "description": "Maximum requests per rate limiting window",
+    "example": "100",
+    "required": false,
+    "default": "100"
+  }
+}
