@@ -27,14 +27,42 @@ import {
   Brain,
 } from "lucide-react";
 import { useDashboardStats, usePatients, useUpcomingAppointments } from "@/hooks/useApi";
+import { authApi } from "@/lib/api";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
 
   // Fetch real data from database
   const { data: dashboardStats, loading: statsLoading, error: statsError } = useDashboardStats();
   const { data: patients, loading: patientsLoading } = usePatients();
   const { data: upcomingAppointments, loading: appointmentsLoading } = useUpcomingAppointments();
+
+  // Get current user from localStorage or API
+  useEffect(() => {
+    const user = authApi.getUser();
+    if (user) {
+      setCurrentUser(user);
+    } else {
+      // If no user, redirect to login
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await authApi.logout();
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Force logout even if API call fails
+      authApi.removeToken();
+      navigate('/login');
+    }
+  };
 
   // Helper function to calculate age from date of birth
   const calculateAge = (dateOfBirth: Date | null) => {
@@ -205,7 +233,10 @@ const Home = () => {
             <Settings className="mr-3 h-5 w-5" />
             Settings
           </Link>
-          <button className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+          >
             <LogOut className="mr-3 h-5 w-5" />
             Log out
           </button>
@@ -248,9 +279,9 @@ const Home = () => {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-sm font-medium">Dr. Emma Wilson</p>
+                <p className="text-sm font-medium">{currentUser?.fullName || 'Dr. Emma Wilson'}</p>
                 <p className="text-xs text-muted-foreground">
-                  Senior Counselor
+                  {currentUser?.role || 'Senior Counselor'}
                 </p>
               </div>
             </div>
@@ -262,7 +293,7 @@ const Home = () => {
           <div className="mb-6">
             <h1 className="text-2xl font-bold">Dashboard</h1>
             <p className="text-muted-foreground">
-              Welcome back, Dr. Wilson. Here's what's happening today.
+              Welcome back, {currentUser?.fullName || 'Dr. Wilson'}. Here's what's happening today.
             </p>
           </div>
 

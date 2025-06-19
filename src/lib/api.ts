@@ -407,3 +407,31 @@ export const dashboardApi = {
     })
   },
 }
+
+// Settings API
+export const settingsApi = {
+  get: () => apiCall<{
+    theme: string;
+    notifications: {
+      email: boolean;
+      push: boolean;
+      sms: boolean;
+    };
+    language: string;
+    timezone: string;
+    privacy: {
+      shareData: boolean;
+      analytics: boolean;
+    };
+    profile: {
+      fullName: string;
+      email: string;
+      role: string;
+    };
+  }>('/api/settings'),
+
+  update: (settings: any) => apiCall<any>('/api/settings', {
+    method: 'PUT',
+    body: JSON.stringify(settings),
+  }),
+}
