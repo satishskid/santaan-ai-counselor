@@ -11,7 +11,8 @@ export const prisma = globalThis.__prisma || new PrismaClient({
 })
 
 // In development, store the instance globally to prevent multiple instances
-if (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production') {
+if (typeof globalThis !== 'undefined' && typeof window === 'undefined') {
+  // Only in Node.js environment (server-side)
   globalThis.__prisma = prisma
 }
 

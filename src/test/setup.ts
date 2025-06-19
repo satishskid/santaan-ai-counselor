@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { vi } from 'vitest'
+// import { vi } from 'vitest' // Only needed for testing, not production build
 
 // Mock environment variables
 Object.defineProperty(import.meta, 'env', {
