@@ -2,7 +2,7 @@
 import path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import { tempo } from "tempo-devtools/dist/vite";
+// import { tempo } from "tempo-devtools/dist/vite"; // Disabled for production
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    tempo(),
+    // tempo(), // Disabled for production
   ],
   resolve: {
     preserveSymlinks: true,

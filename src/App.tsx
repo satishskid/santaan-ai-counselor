@@ -15,7 +15,7 @@ import LiveAPIDemo from "./components/LiveAPIDemo";
 import RealTimeDashboard from "./components/RealTimeDashboard";
 import PatientApp from "./components/PatientApp";
 import PatientLinkGenerator from "./components/PatientLinkGenerator";
-import routes from "tempo-routes";
+// import routes from "tempo-routes"; // Removed for production build
 
 // Wrapper component to handle patient parameter
 function PatientProgressTrackerWrapper() {
@@ -48,11 +48,9 @@ function App() {
   return (
     <Suspense fallback={<p>Loading...</p>}>
       <>
-        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
+        {/* Tempo routes disabled for production */}
         <Routes>
-          {import.meta.env.VITE_TEMPO === "true" && (
-            <Route path="/tempobook/*" element={<div />} />
-          )}
+          {/* Tempo routes disabled for production */}
           <Route path="/" element={<Home />} />
           <Route path="/patient-onboarding" element={<PatientOnboarding />} />
           <Route path="/assessment" element={<AssessmentDashboard />} />

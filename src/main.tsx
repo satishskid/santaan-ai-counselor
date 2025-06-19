@@ -4,8 +4,9 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
-import { TempoDevtools } from "tempo-devtools";
-TempoDevtools.init();
+// Tempo devtools disabled for production
+// import { TempoDevtools } from "tempo-devtools";
+// TempoDevtools.init();
 
 // Register Service Worker for PWA functionality
 if ('serviceWorker' in navigator) {
@@ -113,7 +114,7 @@ window.addEventListener('appinstalled', () => {
   deferredPrompt = null;
 });
 
-const basename = import.meta.env.BASE_URL;
+const basename = import.meta.env?.BASE_URL || "/";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

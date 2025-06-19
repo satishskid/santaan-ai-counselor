@@ -2,8 +2,8 @@
 // This provides a clean interface between components and the API server
 
 // API base URL - automatically detects environment
-const API_BASE_URL = import.meta.env.VITE_API_URL ||
-  (import.meta.env.PROD ? '' : 'http://localhost:3001')
+const API_BASE_URL = import.meta.env?.VITE_API_URL ||
+  (import.meta.env?.PROD ? '' : 'http://localhost:3001')
 
 // Types for API responses
 export interface ApiResponse<T> {

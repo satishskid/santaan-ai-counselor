@@ -55,13 +55,13 @@ vi.mock('react-router-dom', () => ({
 }))
 
 // Global test utilities
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
+(globalThis as any).ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
 }))
 
-global.matchMedia = vi.fn().mockImplementation(query => ({
+;(globalThis as any).matchMedia = vi.fn().mockImplementation(query => ({
   matches: false,
   media: query,
   onchange: null,
