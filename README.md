@@ -1,46 +1,58 @@
-# 🌟 Santaan IVF Counseling Platform
+# 🏥 CounselorTempo - AI-Powered Counseling Practice Management System
 
-> **Comprehensive IVF counseling platform with AI-powered personalized intervention plans, real-time monitoring, and mobile patient engagement.**
+> **Comprehensive counseling practice management system with AI-powered insights, real-time diagnostics, and advanced admin tools for mental health professionals.**
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/satishskid/counselortempo)
-[![PWA Ready](https://img.shields.io/badge/PWA-ready-blue)](https://web.dev/progressive-web-apps/)
-[![Mobile Optimized](https://img.shields.io/badge/mobile-optimized-green)](https://developers.google.com/web/fundamentals/design-and-ux/responsive)
-[![AI Powered](https://img.shields.io/badge/AI-powered-purple)](https://openai.com/)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=flat&logo=vercel)](https://santana-ai-counselor.vercel.app)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=flat&logo=Prisma&logoColor=white)](https://prisma.io/)
+
+## 🌟 **Live Application**
+
+**🔗 Access the application**: [https://santana-ai-counselor.vercel.app](https://santana-ai-counselor.vercel.app)
 
 ## 🎯 **Overview**
 
-Santaan is a cutting-edge IVF counseling platform that revolutionizes fertility treatment support through:
+CounselorTempo is a comprehensive counseling practice management system designed for mental health professionals. Built with cutting-edge technology and featuring advanced diagnostic tools, real-time monitoring, and comprehensive patient care management.
 
-- **🤖 AI-Powered Interventions**: Personalized treatment plans using advanced AI
-- **📱 Mobile PWA Experience**: Native app feel without app store deployment
-- **📊 Real-Time Monitoring**: Live patient progress tracking for counselors
-- **🏥 EMR Integration**: Seamless bidirectional data sync with healthcare systems
-- **🎨 Professional Design**: Santaan.in branded, mobile-first interface
+- **🧪 Advanced Testing Suite**: Comprehensive application testing and diagnostics
+- **🔍 Real-Time System Health**: Live monitoring with automated issue detection
+- **👥 Multi-Role Support**: Counselors, Administrators, and Patients
+- **📊 Comprehensive Analytics**: Real-time dashboard with performance insights
+- **🔐 Enterprise Security**: Role-based access control and secure authentication
+- **🛠️ Admin Tools**: Advanced debugging and system management capabilities
 
 ## ✨ **Key Features**
 
-### 🏥 **For Healthcare Providers**
-- **Patient Link Generator**: Create personalized mobile app links for patients
-- **Real-Time Dashboard**: Monitor patient progress and intervention effectiveness
-- **AI Persona Generator**: Generate comprehensive patient profiles and treatment plans
-- **EMR Integration**: Bidirectional sync with existing healthcare systems
-- **Assessment Tools**: Comprehensive psychological evaluation instruments
-- **Progress Tracking**: Visual analytics and outcome measurement
+### 👨‍⚕️ **For Counselors**
+- **Patient Management**: Comprehensive patient profiles with detailed history
+- **Appointment Scheduling**: Advanced scheduling with automated reminders
+- **Assessment Tools**: Standardized psychological evaluation instruments
+- **Treatment Planning**: Evidence-based treatment plans with goal tracking
+- **Progress Monitoring**: Visual analytics and outcome measurement
+- **Session Notes**: Secure note-taking with search and organization
 
-### 📱 **For Patients**
-- **Mobile PWA App**: Install-to-home-screen progressive web app
-- **Personalized Journey**: Custom intervention plans based on AI analysis
-- **Daily Tasks**: Interactive exercises and progress tracking
-- **Educational Resources**: Curated articles, videos, and audio guides
-- **Achievement System**: Gamified progress with badges and milestones
-- **Offline Support**: Full functionality without internet connection
+### 👨‍💼 **For Administrators**
+- **🧪 Testing Suite**: Comprehensive application testing and validation
+- **🔍 System Health Dashboard**: Real-time monitoring with automated diagnostics
+- **🔧 Debug Tools**: Advanced troubleshooting and system maintenance
+- **👥 User Management**: Role-based access control and user oversight
+- **📊 Analytics Dashboard**: System performance and usage analytics
+- **⚙️ Settings Management**: System configuration and preferences
 
-### 🤖 **AI Integration**
-- **Multiple Providers**: Groq, OpenRouter, Hugging Face support
-- **Persona Generation**: Comprehensive psychological profiling
-- **Intervention Planning**: Evidence-based treatment recommendations
-- **Risk Assessment**: Automated identification of high-risk situations
-- **Progress Adaptation**: Dynamic plan adjustments based on outcomes
+### 👤 **For Patients**
+- **Self-Service Portal**: Appointment booking and profile management
+- **Progress Tracking**: Personal progress visualization and goal tracking
+- **Resource Access**: Educational materials and self-help resources
+- **Secure Communication**: HIPAA-compliant messaging with counselors
+- **Mobile Responsive**: Full functionality on all devices
+
+### 🛠️ **Advanced Admin Tools**
+- **Automated Testing**: 50+ comprehensive system tests
+- **Real-Time Diagnostics**: Live system health monitoring
+- **Error Detection**: Automated issue identification and recommendations
+- **Performance Monitoring**: System resource and response time tracking
+- **Security Validation**: Authentication and authorization testing
 
 ## 🚀 **Quick Start**
 
