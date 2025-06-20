@@ -18,6 +18,7 @@ import PatientLinkGenerator from "./components/PatientLinkGenerator";
 import Settings from "./components/Settings";
 import SystemHealthDashboard from "./components/SystemHealthDashboard";
 import AdminDebugDashboard from "./components/AdminDebugDashboard";
+import AdminTestingSuite from "./components/AdminTestingSuite";
 // import routes from "tempo-routes"; // Removed for production build
 
 // Wrapper component to handle patient parameter
@@ -81,6 +82,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/system-health" element={<SystemHealthDashboard />} />
           <Route path="/admin-debug" element={<AdminDebugDashboard />} />
+          <Route path="/admin/testing-suite" element={<AdminTestingSuite />} />
         </Routes>
       </>
     </Suspense>

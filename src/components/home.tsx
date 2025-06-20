@@ -234,6 +234,13 @@ const Home = () => {
             🔧 Debug System
           </Link>
           <Link
+            to="/admin/testing-suite"
+            className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+          >
+            <Activity className="mr-3 h-5 w-5" />
+            🧪 Testing Suite
+          </Link>
+          <Link
             to="/settings"
             className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors"
           >
