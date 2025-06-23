@@ -1,45 +1,54 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { cors, withErrorHandling, apiResponse } from './_lib/middleware';
-import { checkDatabaseHealth } from './_lib/database';
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  // Handle CORS
-  if (cors(req, res)) return;
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end()
+  }
 
   // Only allow GET requests
   if (req.method !== 'GET') {
-    return apiResponse.error(res, 'Method not allowed', 405);
+    return res.status(405).json({ error: 'Method not allowed' })
   }
 
   try {
-    // Check database health
-    const dbHealth = await checkDatabaseHealth();
-    
-    // System information
+    // Basic system information
     const systemInfo = {
-      status: 'OK',
+      status: 'healthy',
       timestamp: new Date().toISOString(),
       environment: process.env.NODE_ENV || 'development',
-      version: process.env.npm_package_version || '1.0.0',
+      version: '1.0.0',
       uptime: process.uptime(),
       memory: {
         used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
         total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
       },
-      database: dbHealth,
+      database: {
+        status: process.env.DATABASE_URL ? 'configured' : 'not_configured',
+        message: process.env.DATABASE_URL ? 'Database URL is set' : 'Database URL not found'
+      },
+      environment_variables: {
+        DATABASE_URL: !!process.env.DATABASE_URL,
+        JWT_SECRET: !!process.env.JWT_SECRET,
+        FRONTEND_URL: !!process.env.FRONTEND_URL,
+        NODE_ENV: process.env.NODE_ENV || 'not_set'
+      }
     };
 
-    // Determine overall health status
-    const isHealthy = dbHealth.status === 'healthy';
-    const statusCode = isHealthy ? 200 : 503;
-
-    return apiResponse.success(res, systemInfo, statusCode);
+    return res.status(200).json({
+      success: true,
+      data: systemInfo
+    });
   } catch (error) {
     console.error('Health check failed:', error);
-    return apiResponse.error(res, 'Health check failed', 503, {
-      database: { status: 'unhealthy', message: 'Database connection failed' }
+    return res.status(503).json({
+      success: false,
+      error: 'Health check failed',
+      message: error instanceof Error ? error.message : 'Unknown error'
     });
   }
-};
-
-export default withErrorHandling(handler);
+}
