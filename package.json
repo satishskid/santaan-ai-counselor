@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc ; vite build",
     "postbuild": "echo 'Skipping database deployment during build'",
+    "health-check": "node scripts/health-check.js",
     "build-no-errors": "tsc ; vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
