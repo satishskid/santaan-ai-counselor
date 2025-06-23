@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from 'next'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 // Self-contained diagnostic system that doesn't rely on other modules
 export default async function handler(req: VercelRequest, res: VercelResponse) {

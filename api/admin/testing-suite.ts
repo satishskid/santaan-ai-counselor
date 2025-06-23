@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from 'next'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 // Comprehensive testing suite for admin use
 export default async function handler(req: VercelRequest, res: VercelResponse) {
