@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { cors, withErrorHandling, apiResponse, authenticate, AuthenticatedRequest } from '../_lib/middleware';
 import { getUserFromToken } from '../_lib/auth';
 
-const handler = async (req: AuthenticatedRequest, res: NextApiResponse) => {
+const handler = async (req: AuthenticatedRequest, res: VercelResponse) => {
   // Handle CORS
   if (cors(req, res)) return;
 

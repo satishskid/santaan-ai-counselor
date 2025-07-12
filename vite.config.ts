@@ -8,8 +8,10 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   base: process.env.NODE_ENV === "development" ? "/" : process.env.VITE_BASE_PATH || "/",
   build: {
-    target: ['es2015', 'chrome58', 'firefox57', 'safari11', 'edge16'],
-    polyfillModulePreload: true,
+    target: ['es2020', 'chrome80', 'firefox78', 'safari14', 'edge80'],
+    modulePreload: {
+      polyfill: true
+    },
     cssCodeSplit: false,
     rollupOptions: {
       output: {

@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import jwt from 'jsonwebtoken';
 import rateLimit from 'express-rate-limit';
 import { z } from 'zod';
@@ -21,7 +21,7 @@ export const securityHeaders = {
 };
 
 // CORS middleware
-export const cors = (req: NextApiRequest, res: NextApiResponse) => {
+export const cors = (req: VercelRequest, res: VercelResponse) => {
   // Set CORS headers
   Object.entries(corsHeaders).forEach(([key, value]) => {
     res.setHeader(key, value);
@@ -42,7 +42,7 @@ export const cors = (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 // JWT token verification
-export interface AuthenticatedRequest extends NextApiRequest {
+export interface AuthenticatedRequest extends VercelRequest {
   user?: {
     id: string;
     email: string;
@@ -63,7 +63,7 @@ export const verifyToken = (token: string) => {
 };
 
 // Authentication middleware
-export const authenticate = (req: AuthenticatedRequest, res: NextApiResponse) => {
+export const authenticate = (req: AuthenticatedRequest, res: VercelResponse) => {
   const authHeader = req.headers.authorization;
   
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -84,7 +84,7 @@ export const authenticate = (req: AuthenticatedRequest, res: NextApiResponse) =>
 
 // Role-based authorization
 export const authorize = (roles: string[]) => {
-  return (req: AuthenticatedRequest, res: NextApiResponse) => {
+  return (req: AuthenticatedRequest, res: VercelResponse) => {
     if (!req.user) {
       res.status(401).json({ error: 'Authentication required' });
       return false;
@@ -112,7 +112,7 @@ export const createRateLimit = (windowMs: number = 15 * 60 * 1000, max: number =
 
 // Input validation middleware
 export const validateInput = <T>(schema: z.ZodSchema<T>) => {
-  return (req: NextApiRequest, res: NextApiResponse): T | null => {
+  return (req: VercelRequest, res: VercelResponse): T | null => {
     try {
       const validatedData = schema.parse(req.body);
       return validatedData;
@@ -135,7 +135,7 @@ export const validateInput = <T>(schema: z.ZodSchema<T>) => {
 
 // Error handling wrapper
 export const withErrorHandling = (handler: Function) => {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
+  return async (req: VercelRequest, res: VercelResponse) => {
     try {
       await handler(req, res);
     } catch (error) {
@@ -161,7 +161,7 @@ export const withErrorHandling = (handler: Function) => {
 
 // Method validation
 export const allowMethods = (methods: string[]) => {
-  return (req: NextApiRequest, res: NextApiResponse) => {
+  return (req: VercelRequest, res: VercelResponse) => {
     if (!methods.includes(req.method || '')) {
       res.setHeader('Allow', methods.join(', '));
       res.status(405).json({ error: `Method ${req.method} not allowed` });
@@ -172,7 +172,7 @@ export const allowMethods = (methods: string[]) => {
 };
 
 // Request logging middleware
-export const logRequest = (req: NextApiRequest, res: NextApiResponse) => {
+export const logRequest = (req: VercelRequest, res: VercelResponse) => {
   const start = Date.now();
   const { method, url } = req;
   
@@ -205,7 +205,7 @@ export const sanitizeInput = (data: any): any => {
 
 // API response helper
 export const apiResponse = {
-  success: (res: NextApiResponse, data: any, status: number = 200) => {
+  success: (res: VercelResponse, data: any, status: number = 200) => {
     res.status(status).json({
       success: true,
       data,
@@ -213,7 +213,7 @@ export const apiResponse = {
     });
   },
   
-  error: (res: NextApiResponse, message: string, status: number = 400, details?: any) => {
+  error: (res: VercelResponse, message: string, status: number = 400, details?: any) => {
     res.status(status).json({
       success: false,
       error: message,
