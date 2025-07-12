@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -45,6 +46,7 @@ interface AIPersonaGeneratorProps {
 }
 
 const AIPersonaGenerator: React.FC<AIPersonaGeneratorProps> = ({ patientData, onComplete }) => {
+  const navigate = useNavigate();
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationProgress, setGenerationProgress] = useState(0);
   const [persona, setPersona] = useState<any>(null);
@@ -388,9 +390,14 @@ const AIPersonaGenerator: React.FC<AIPersonaGeneratorProps> = ({ patientData, on
                   }
                 </span>
                 {aiConfig.provider === 'mock' && (
-                  <Badge className="bg-white/20 text-white border-white/30 text-xs">
+                  <Button
+                    onClick={() => navigate('/admin-settings')}
+                    variant="outline"
+                    size="sm"
+                    className="bg-white/20 text-white border-white/30 text-xs hover:bg-white/30 h-6 px-2"
+                  >
                     Configure API in Admin Panel
-                  </Badge>
+                  </Button>
                 )}
               </div>
             </div>
