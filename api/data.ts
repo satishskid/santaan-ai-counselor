@@ -11,15 +11,45 @@ const prisma = new PrismaClient({
   }
 })
 
-// Import Indian demo data
-import {
-  indianDemoClinic,
-  indianDemoUsers,
-  indianDemoPatients,
-  indianDemoAppointments,
-  indianDemoAssessments,
-  salesDemoCredentials
-} from '../src/data/indianDemoData'
+// Indian demo data (inline to avoid import issues)
+const indianDemoUsers = [
+  {
+    id: 'demo-admin-india',
+    email: 'demo.admin@fertilitycaremumbai.com',
+    password: 'Demo@2024',
+    fullName: 'Dr. Priya Sharma',
+    firstName: 'Priya',
+    lastName: 'Sharma',
+    role: 'ADMIN',
+    clinicId: 'demo-clinic-india',
+    phone: '+91 98765 43210',
+    isActive: true
+  },
+  {
+    id: 'demo-counselor1-india',
+    email: 'demo.counselor1@fertilitycaremumbai.com',
+    password: 'Demo@2024',
+    fullName: 'Dr. Anjali Mehta',
+    firstName: 'Anjali',
+    lastName: 'Mehta',
+    role: 'COUNSELOR',
+    clinicId: 'demo-clinic-india',
+    phone: '+91 98765 43211',
+    isActive: true
+  },
+  {
+    id: 'demo-counselor2-india',
+    email: 'demo.counselor2@fertilitycaremumbai.com',
+    password: 'Demo@2024',
+    fullName: 'Dr. Rajesh Kumar',
+    firstName: 'Rajesh',
+    lastName: 'Kumar',
+    role: 'COUNSELOR',
+    clinicId: 'demo-clinic-india',
+    phone: '+91 98765 43212',
+    isActive: true
+  }
+]
 import { verifyToken } from './_lib/auth'
 
 // Note: Removed PrismaClient import to avoid database connection issues in demo
