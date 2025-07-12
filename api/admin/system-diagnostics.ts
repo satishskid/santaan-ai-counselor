@@ -71,20 +71,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           api_directory_exists: true,
           files_found: apiFiles.slice(0, 10), // First 10 files
           total_files: apiFiles.length
-        }
+        } as any
       } else {
         diagnostics.file_system_test = {
           status: 'warning',
           api_directory_exists: false,
+          files_found: [],
           message: 'API directory not found at expected location'
-        }
+        } as any
         diagnostics.warnings.push('API directory not accessible')
       }
     } catch (fsError) {
       diagnostics.file_system_test = {
         status: 'error',
+        files_found: [],
         message: fsError instanceof Error ? fsError.message : 'File system access failed'
-      }
+      } as any
       diagnostics.errors.push('File system access failed')
     }
 
@@ -103,12 +105,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           status: 'connected',
           response_time: Date.now() - dbStart,
           message: 'Database connection successful'
-        }
+        } as any
       } else {
         diagnostics.database_test = {
           status: 'no_url',
           message: 'DATABASE_URL environment variable not set'
-        }
+        } as any
         diagnostics.warnings.push('DATABASE_URL not configured')
       }
     } catch (dbError) {
@@ -116,7 +118,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         status: 'error',
         message: dbError instanceof Error ? dbError.message : 'Database connection failed',
         error_type: dbError instanceof Error ? dbError.constructor.name : 'Unknown'
-      }
+      } as any
       diagnostics.errors.push(`Database error: ${dbError instanceof Error ? dbError.message : 'Unknown'}`)
     }
 
