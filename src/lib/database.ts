@@ -5,9 +5,14 @@ declare global {
   var __prisma: PrismaClient | undefined
 }
 
-// Create a single instance of PrismaClient
+// Create a single instance of PrismaClient with production configuration
 export const prisma = globalThis.__prisma || new PrismaClient({
-  log: ['query', 'error', 'warn'],
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL
+    }
+  },
+  log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
 })
 
 // In development, store the instance globally to prevent multiple instances

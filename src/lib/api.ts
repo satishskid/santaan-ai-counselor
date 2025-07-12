@@ -177,7 +177,7 @@ export const patientApi = {
 
   getById: async (id: string) => {
     try {
-      return await apiCall<any>(`/api/patients/${id}`);
+      return await apiCall<any>(`/api/patients?id=${id}`);
     } catch (error) {
       // Fallback to mock data
       return {
@@ -210,12 +210,12 @@ export const patientApi = {
     body: JSON.stringify(data),
   }),
 
-  update: (id: string, data: any) => apiCall<any>(`/api/patients/${id}`, {
+  update: (id: string, data: any) => apiCall<any>(`/api/patients?id=${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   }),
 
-  delete: (id: string) => apiCall<any>(`/api/patients/${id}`, {
+  delete: (id: string) => apiCall<any>(`/api/patients?id=${id}`, {
     method: 'DELETE',
   }),
 }
@@ -268,11 +268,11 @@ export const treatmentPathwayApi = {
 // Assessment API
 export const assessmentApi = {
   getAll: (patientId?: string) => {
-    const url = patientId ? `/api/assessments?patientId=${patientId}` : '/api/assessments'
+    const url = patientId ? `/api/data?type=assessments&patientId=${patientId}` : '/api/data?type=assessments'
     return apiCall<any[]>(url)
   },
 
-  getById: (id: string) => apiCall<any>(`/api/assessments/${id}`),
+  getById: (id: string) => apiCall<any>(`/api/data?type=assessments&id=${id}`),
 
   create: (data: {
     patientId: string
@@ -282,17 +282,17 @@ export const assessmentApi = {
     answers?: string
     score?: number
     notes?: string
-  }) => apiCall<any>('/api/assessments', {
+  }) => apiCall<any>('/api/data?type=assessments', {
     method: 'POST',
     body: JSON.stringify(data),
   }),
 
-  update: (id: string, data: any) => apiCall<any>(`/api/assessments/${id}`, {
+  update: (id: string, data: any) => apiCall<any>(`/api/data?type=assessments&id=${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   }),
 
-  delete: (id: string) => apiCall<any>(`/api/assessments/${id}`, {
+  delete: (id: string) => apiCall<any>(`/api/data?type=assessments&id=${id}`, {
     method: 'DELETE',
   }),
 }
@@ -363,15 +363,15 @@ export const milestoneApi = {
 // Appointment API
 export const appointmentApi = {
   getAll: (patientId?: string) => {
-    const url = patientId ? `/api/appointments?patientId=${patientId}` : '/api/appointments'
+    const url = patientId ? `/api/data?type=appointments&patientId=${patientId}` : '/api/data?type=appointments'
     return apiCall<any[]>(url)
   },
 
-  getById: (id: string) => apiCall<any>(`/api/appointments/${id}`),
+  getById: (id: string) => apiCall<any>(`/api/data?type=appointments&id=${id}`),
 
   getUpcoming: async () => {
     try {
-      return await apiCall<any[]>('/api/appointments/upcoming');
+      return await apiCall<any[]>('/api/data?type=appointments&upcoming=true');
     } catch (error) {
       // Fallback to mock data if API fails
       return {
@@ -408,24 +408,24 @@ export const appointmentApi = {
     durationMinutes?: number
     type?: string
     notes?: string
-  }) => apiCall<any>('/api/appointments', {
+  }) => apiCall<any>('/api/data?type=appointments', {
     method: 'POST',
     body: JSON.stringify(data),
   }),
 
-  update: (id: string, data: any) => apiCall<any>(`/api/appointments/${id}`, {
+  update: (id: string, data: any) => apiCall<any>(`/api/data?type=appointments&id=${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   }),
 
-  delete: (id: string) => apiCall<any>(`/api/appointments/${id}`, {
+  delete: (id: string) => apiCall<any>(`/api/data?type=appointments&id=${id}`, {
     method: 'DELETE',
   }),
 }
 
 // Resource API
 export const resourceApi = {
-  getAll: () => Promise.resolve({ success: true, data: [], error: null }),
+  getAll: () => apiCall<any[]>('/api/data?type=resources'),
 
   getById: (id: string) => Promise.resolve({ success: true, data: null, error: null }),
 
@@ -482,21 +482,7 @@ export const userApi = {
 
 // Dashboard API - aggregated data for dashboard
 export const dashboardApi = {
-  getStats: () => {
-    // Dashboard stats endpoint removed - return mock data for now
-    return Promise.resolve({
-      data: {
-        totalPatients: 0,
-        upcomingAppointments: 0,
-        activeTreatmentPlans: 0,
-        completedAssessments: 0,
-        recentPatients: [],
-        todaysAppointments: []
-      },
-      error: null,
-      success: true
-    })
-  },
+  getStats: () => apiCall<any>('/api/data?type=dashboard'),
 }
 
 // Settings API

@@ -8,14 +8,48 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+// Multi-tenant clinic model
+model Clinic {
+  id                String   @id @default(cuid())
+  name              String
+  email             String   @unique
+  phone             String?
+  address           String?
+  website           String?
+  logoUrl           String?
+  subscriptionPlan  String   @default("BASIC") // BASIC, PREMIUM, ENTERPRISE
+  subscriptionStatus String  @default("ACTIVE") // ACTIVE, SUSPENDED, CANCELLED
+  maxCounselors     Int      @default(5)
+  maxPatients       Int      @default(100)
+  settings          String?  // JSON string for clinic-specific settings
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  users             User[]
+  patients          Patient[]
+
+  @@map("clinics")
+}
+
 model User {
   id                  String          @id @default(cuid())
+  clerkId             String?         @unique // Clerk user ID for authentication
   email               String          @unique
   fullName            String?
-  role                String          @default("PATIENT")
+  firstName           String?
+  lastName            String?
+  role                String          @default("PATIENT") // PATIENT, COUNSELOR, CLINIC_ADMIN, SUPER_ADMIN
   avatarUrl           String?
+  phone               String?
+  isActive            Boolean         @default(true)
+  lastLoginAt         DateTime?
+  clinicId            String?         // Multi-tenant: which clinic this user belongs to
   createdAt           DateTime        @default(now())
   updatedAt           DateTime        @updatedAt
+
+  // Relations
+  clinic              Clinic?         @relation(fields: [clinicId], references: [id])
   appointments        Appointment[]   @relation("CounselorAppointments")
   assessments         Assessment[]    @relation("CounselorAssessments")
   notes               Note[]          @relation("CounselorNotes")
@@ -36,14 +70,20 @@ model Patient {
   phone            String?
   dateOfBirth      DateTime?
   gender           String?
-  status           String            @default("NEW")
+  status           String            @default("NEW") // NEW, ACTIVE, COMPLETED, INACTIVE
   diagnosis        String?
   stage            String?
   nextAppointment  DateTime?
   avatarUrl        String?
+  clinicId         String?           // Multi-tenant: which clinic this patient belongs to
+  referralSource   String?           // How patient was referred
+  emergencyContact String?           // JSON string with emergency contact info
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   counselorId      String?
+
+  // Relations
+  clinic           Clinic?           @relation(fields: [clinicId], references: [id])
   appointments     Appointment[]
   assessments      Assessment[]
   fertilityJourney FertilityJourney?

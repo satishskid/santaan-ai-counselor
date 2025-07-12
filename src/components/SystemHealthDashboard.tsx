@@ -69,7 +69,7 @@ const SystemHealthDashboard = () => {
   const fetchHealthData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/system-health');
+      const response = await fetch('/api/data?type=system-health');
       const data = await response.json();
       
       if (data.success) {

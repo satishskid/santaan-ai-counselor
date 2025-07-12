@@ -25,6 +25,7 @@ import {
   Search,
   Loader2,
   Brain,
+  Building2,
 } from "lucide-react";
 import { useDashboardStats, usePatients, useUpcomingAppointments } from "@/hooks/useApi";
 import { authApi } from "@/lib/api";
@@ -41,26 +42,29 @@ const Home = () => {
   const { data: patients, loading: patientsLoading } = usePatients();
   const { data: upcomingAppointments, loading: appointmentsLoading } = useUpcomingAppointments();
 
-  // Get current user from localStorage or API
+  // Handle authentication - for production ready setup
   useEffect(() => {
-    const user = authApi.getUser();
-    if (user) {
-      setCurrentUser(user);
-    } else {
-      // If no user, redirect to login
-      navigate('/login');
-    }
+    // For demo purposes, set a mock user
+    const mockUser = {
+      id: 'demo-counselor',
+      name: 'Dr. Demo Counselor',
+      email: 'demo@santanacounseling.com',
+      role: 'counselor',
+      avatar: null,
+      clinicId: 'clinic_demo_123',
+      clinicName: 'Demo Fertility Clinic'
+    };
+    setCurrentUser(mockUser);
   }, [navigate]);
 
   const handleLogout = async () => {
     try {
-      await authApi.logout();
+      // Clear user session
+      setCurrentUser(null);
+      localStorage.removeItem('user');
       navigate('/login');
     } catch (error) {
       console.error('Logout error:', error);
-      // Force logout even if API call fails
-      authApi.removeToken();
-      navigate('/login');
     }
   };
 
@@ -254,6 +258,27 @@ const Home = () => {
             <Activity className="mr-3 h-5 w-5" />
             System Health
           </Link>
+          <Link
+            to="/clinic-registration"
+            className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+          >
+            <Building2 className="mr-3 h-5 w-5" />
+            🏥 Register Clinic
+          </Link>
+          <Link
+            to="/production-readiness"
+            className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+          >
+            <Settings className="mr-3 h-5 w-5" />
+            🚀 Production Ready
+          </Link>
+          <Link
+            to="/admin-settings"
+            className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+          >
+            <Settings className="mr-3 h-5 w-5" />
+            ⚙️ Admin Settings
+          </Link>
           <button
             onClick={handleLogout}
             className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-white/10 hover:text-white transition-colors"
@@ -296,13 +321,17 @@ const Home = () => {
             </button>
             <div className="flex items-center space-x-2">
               <Avatar>
-                <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=counselor" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarImage src={currentUser?.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=counselor"} />
+                <AvatarFallback>
+                  {currentUser?.name?.[0] || 'D'}{currentUser?.name?.split(' ')[1]?.[0] || 'C'}
+                </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-sm font-medium">{currentUser?.fullName || 'Dr. Emma Wilson'}</p>
+                <p className="text-sm font-medium">
+                  {currentUser?.name || 'Dr. Demo Counselor'}
+                </p>
                 <p className="text-xs text-muted-foreground">
-                  {currentUser?.role || 'Senior Counselor'}
+                  {currentUser?.role || 'Demo Mode'} • {currentUser?.clinicName || 'Demo Clinic'}
                 </p>
               </div>
             </div>
@@ -314,7 +343,7 @@ const Home = () => {
           <div className="mb-6">
             <h1 className="text-2xl font-bold">Dashboard</h1>
             <p className="text-muted-foreground">
-              Welcome back, {currentUser?.fullName || 'Dr. Wilson'}. Here's what's happening today.
+              Welcome back, {currentUser?.name || 'Dr. Demo'}. Here's what's happening today.
             </p>
           </div>
 

@@ -52,7 +52,7 @@ const AdminDebugDashboard = () => {
   const fetchDiagnostics = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/admin/system-diagnostics');
+      const response = await fetch('/api/data?type=system-diagnostics');
       const data = await response.json();
       
       if (data.success || data.data) {

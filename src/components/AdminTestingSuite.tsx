@@ -71,7 +71,7 @@ const AdminTestingSuite = () => {
   const runTestSuite = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/admin/testing-suite');
+      const response = await fetch('/api/data?type=testing-suite');
       const data = await response.json();
       
       if (data.success) {
