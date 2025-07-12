@@ -54,12 +54,12 @@ class AIService {
       return JSON.parse(savedConfig);
     }
     
-    // Default configuration (mock mode)
+    // Default configuration (Groq with real API)
     return {
-      provider: 'mock',
-      apiKey: '',
-      modelName: 'mock-model',
-      endpoint: '',
+      provider: 'groq',
+      apiKey: process.env.GROQ_API_KEY || '',
+      modelName: 'llama-3.1-70b-versatile',
+      endpoint: 'https://api.groq.com/openai/v1/chat/completions',
       temperature: 0.7,
       maxTokens: 2000,
       timeout: 60,

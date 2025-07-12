@@ -59,26 +59,26 @@ const ClinicRegistration = () => {
     {
       id: 'BASIC',
       name: 'Basic Plan',
-      price: '$99/month',
+      price: '₹8,299/month',
       counselors: 5,
       patients: 100,
-      features: ['Basic Dashboard', 'Patient Management', 'Assessment Tools', 'Email Support']
+      features: ['Basic Dashboard', 'Patient Management', 'Assessment Tools', 'Email Support', 'Hindi Language Support']
     },
     {
       id: 'PREMIUM',
       name: 'Premium Plan',
-      price: '$199/month',
+      price: '₹16,599/month',
       counselors: 15,
       patients: 500,
-      features: ['Advanced Analytics', 'Custom Branding', 'API Access', 'Priority Support', 'EMR Integration Ready']
+      features: ['Advanced Analytics', 'Custom Branding', 'API Access', 'Priority Support', 'EMR Integration Ready', 'WhatsApp Integration']
     },
     {
       id: 'ENTERPRISE',
       name: 'Enterprise Plan',
-      price: 'Custom',
+      price: '₹41,499/month',
       counselors: 'Unlimited',
       patients: 'Unlimited',
-      features: ['White Label Solution', 'Custom Integrations', 'Dedicated Support', 'SLA Guarantee', 'Advanced Security']
+      features: ['White Label Solution', 'Custom Integrations', 'Dedicated Support', 'SLA Guarantee', 'Advanced Security', 'On-premise Deployment']
     }
   ];
 

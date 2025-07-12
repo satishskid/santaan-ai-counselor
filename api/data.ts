@@ -10,6 +10,16 @@ const prisma = new PrismaClient({
     }
   }
 })
+
+// Import Indian demo data
+import {
+  indianDemoClinic,
+  indianDemoUsers,
+  indianDemoPatients,
+  indianDemoAppointments,
+  indianDemoAssessments,
+  salesDemoCredentials
+} from '../src/data/indianDemoData'
 import { verifyToken } from './_lib/auth'
 
 // Note: Removed PrismaClient import to avoid database connection issues in demo
@@ -667,17 +677,31 @@ async function getDashboardStats(req: VercelRequest, res: VercelResponse) {
         {
           id: '1',
           type: 'assessment_completed',
-          patientName: 'Sarah J.',
-          action: 'Completed Emotional Needs Assessment',
+          patientName: 'Kavya R.',
+          action: 'Completed Fertility Quality of Life Assessment',
           timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-          score: 78
+          score: 68
         },
         {
           id: '2',
           type: 'patient_registered',
-          patientName: 'Michael S.',
-          action: 'New patient registration',
+          patientName: 'Arjun P.',
+          action: 'New patient registration - Male factor infertility',
           timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString()
+        },
+        {
+          id: '3',
+          type: 'appointment_scheduled',
+          patientName: 'Meera S.',
+          action: 'Grief counseling session scheduled',
+          timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString()
+        },
+        {
+          id: '4',
+          type: 'treatment_success',
+          patientName: 'Deepika N.',
+          action: 'IVF cycle successful - 12 weeks pregnant',
+          timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString()
         }
       ],
       alerts: [
@@ -1074,32 +1098,53 @@ async function processAuthLogin(req: VercelRequest, res: VercelResponse) {
       })
     }
 
-    // For demo purposes, accept any email/password combination
-    let userData = {
-      id: `user_${Date.now()}`,
-      email: email,
-      firstName: 'Demo',
-      lastName: 'User',
-      role: 'COUNSELOR',
-      clinicId: clinicId || 'clinic_demo_123',
-      clinicName: 'Demo Fertility Clinic',
-      isActive: true,
-      lastLoginAt: new Date().toISOString()
-    }
+    // Check for Indian demo users first
+    const indianDemoUser = indianDemoUsers.find(user => user.email === email)
 
-    // Determine role based on email
-    if (email.includes('admin')) {
-      userData.role = 'CLINIC_ADMIN'
-      userData.firstName = 'Admin'
-      userData.lastName = 'User'
-    } else if (email.includes('counselor')) {
-      userData.role = 'COUNSELOR'
-      userData.firstName = 'Counselor'
-      userData.lastName = 'User'
-    } else if (email.includes('patient')) {
-      userData.role = 'PATIENT'
-      userData.firstName = 'Patient'
-      userData.lastName = 'User'
+    let userData
+    if (indianDemoUser && password === 'Demo@2024') {
+      // Use Indian demo user data
+      userData = {
+        id: indianDemoUser.id,
+        email: indianDemoUser.email,
+        firstName: indianDemoUser.firstName,
+        lastName: indianDemoUser.lastName,
+        fullName: indianDemoUser.fullName,
+        role: indianDemoUser.role,
+        clinicId: indianDemoUser.clinicId,
+        clinicName: 'Fertility Care Centre Mumbai',
+        phone: indianDemoUser.phone,
+        isActive: indianDemoUser.isActive,
+        lastLoginAt: new Date().toISOString()
+      }
+    } else {
+      // Fallback to generic demo user
+      userData = {
+        id: `user_${Date.now()}`,
+        email: email,
+        firstName: 'Demo',
+        lastName: 'User',
+        role: 'COUNSELOR',
+        clinicId: clinicId || 'clinic_demo_123',
+        clinicName: 'Demo Fertility Clinic',
+        isActive: true,
+        lastLoginAt: new Date().toISOString()
+      }
+
+      // Determine role based on email
+      if (email.includes('admin')) {
+        userData.role = 'CLINIC_ADMIN'
+        userData.firstName = 'Admin'
+        userData.lastName = 'User'
+      } else if (email.includes('counselor')) {
+        userData.role = 'COUNSELOR'
+        userData.firstName = 'Counselor'
+        userData.lastName = 'User'
+      } else if (email.includes('patient')) {
+        userData.role = 'PATIENT'
+        userData.firstName = 'Patient'
+        userData.lastName = 'User'
+      }
     }
 
     // Generate JWT token with proper security

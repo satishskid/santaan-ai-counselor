@@ -29,25 +29,25 @@ const SimpleLogin = () => {
 
   const demoAccounts = [
     {
-      email: 'admin@demo.com',
-      password: 'demo123',
-      role: 'Clinic Admin',
-      description: 'Full access to clinic management',
+      email: 'demo.admin@fertilitycaremumbai.com',
+      password: 'Demo@2024',
+      role: 'Dr. Priya Sharma - Clinic Admin',
+      description: 'Fertility Care Centre Mumbai - Full access',
       icon: Building2
     },
     {
-      email: 'counselor@demo.com',
-      password: 'demo123',
-      role: 'Counselor',
-      description: 'Patient management and counseling tools',
+      email: 'demo.counselor1@fertilitycaremumbai.com',
+      password: 'Demo@2024',
+      role: 'Dr. Anjali Mehta - Senior Counselor',
+      description: 'Patient counseling and treatment planning',
       icon: Stethoscope
     },
     {
-      email: 'patient@demo.com',
-      password: 'demo123',
-      role: 'Patient',
-      description: 'Patient portal access',
-      icon: User
+      email: 'demo.counselor2@fertilitycaremumbai.com',
+      password: 'Demo@2024',
+      role: 'Dr. Rajesh Kumar - Counselor',
+      description: 'Specialized in male factor and grief counseling',
+      icon: Stethoscope
     }
   ];
 
@@ -104,9 +104,9 @@ const SimpleLogin = () => {
       <div className="w-full max-w-md space-y-6">
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Santaan.in</h1>
-          <p className="text-sm text-gray-600 italic">science for smiles</p>
-          <p className="mt-2 text-lg text-gray-700">Sign in to your account</p>
+          <h1 className="text-3xl font-bold text-gray-900">🇮🇳 Santana AI Counselor</h1>
+          <p className="text-sm text-gray-600 italic">India's Premier Fertility Counseling Platform</p>
+          <p className="mt-2 text-lg text-gray-700">Sales Demo - Fertility Care Centre Mumbai</p>
         </div>
 
         {/* Demo Accounts */}
