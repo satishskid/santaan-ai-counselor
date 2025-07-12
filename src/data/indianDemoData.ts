@@ -98,6 +98,7 @@ export const indianDemoPatients = [
     counselorId: 'demo-counselor1-india',
     userId: 'demo-patient1-user-india',
     status: 'ACTIVE',
+    location: 'Bangalore, Karnataka',
     medicalHistory: JSON.stringify({
       primaryDiagnosis: 'PCOS with irregular ovulation',
       secondaryDiagnosis: 'Mild endometriosis',
@@ -136,6 +137,7 @@ export const indianDemoPatients = [
     counselorId: 'demo-counselor1-india',
     userId: 'demo-patient2-user-india',
     status: 'ACTIVE',
+    location: 'Bhubaneswar, Odisha',
     medicalHistory: JSON.stringify({
       primaryDiagnosis: 'Male factor infertility - Low sperm count',
       secondaryDiagnosis: 'Varicocele Grade 2',
@@ -174,6 +176,7 @@ export const indianDemoPatients = [
     counselorId: 'demo-counselor2-india',
     userId: 'demo-patient3-user-india',
     status: 'ACTIVE',
+    location: 'Hyderabad, Telangana',
     medicalHistory: JSON.stringify({
       primaryDiagnosis: 'Recurrent pregnancy loss',
       secondaryDiagnosis: 'Antiphospholipid syndrome',
@@ -212,6 +215,7 @@ export const indianDemoPatients = [
     counselorId: 'demo-counselor2-india',
     userId: 'demo-patient4-user-india',
     status: 'NEW',
+    location: 'Pune, Maharashtra',
     medicalHistory: JSON.stringify({
       primaryDiagnosis: 'Unexplained infertility',
       secondaryDiagnosis: 'None',
@@ -250,6 +254,7 @@ export const indianDemoPatients = [
     counselorId: 'demo-counselor1-india',
     userId: 'demo-patient5-user-india',
     status: 'COMPLETED',
+    location: 'Chennai, Tamil Nadu',
     medicalHistory: JSON.stringify({
       primaryDiagnosis: 'Tubal factor infertility',
       secondaryDiagnosis: 'Previous ectopic pregnancy',

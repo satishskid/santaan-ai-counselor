@@ -100,7 +100,7 @@ async function getPatients(req: VercelRequest, res: VercelResponse) {
         counselorId: 'demo-counselor1-india',
         diagnosis: 'PCOS with irregular ovulation',
         currentTreatment: 'IUI Cycle 4',
-        location: 'Mumbai, Maharashtra'
+        location: 'Bangalore, Karnataka'
       },
       {
         id: 'demo-patient2-india',
@@ -114,7 +114,7 @@ async function getPatients(req: VercelRequest, res: VercelResponse) {
         counselorId: 'demo-counselor1-india',
         diagnosis: 'Male factor infertility - Low sperm count',
         currentTreatment: 'ICSI Cycle 3',
-        location: 'Ahmedabad, Gujarat'
+        location: 'Bhubaneswar, Odisha'
       },
       {
         id: 'demo-patient3-india',
@@ -128,7 +128,7 @@ async function getPatients(req: VercelRequest, res: VercelResponse) {
         counselorId: 'demo-counselor2-india',
         diagnosis: 'Recurrent pregnancy loss',
         currentTreatment: 'IVF with PGT Cycle 1',
-        location: 'Delhi, NCR'
+        location: 'Hyderabad, Telangana'
       },
       {
         id: 'demo-patient4-india',
@@ -142,7 +142,7 @@ async function getPatients(req: VercelRequest, res: VercelResponse) {
         counselorId: 'demo-counselor2-india',
         diagnosis: 'Unexplained infertility',
         currentTreatment: 'Initial consultation',
-        location: 'Bangalore, Karnataka'
+        location: 'Pune, Maharashtra'
       },
       {
         id: 'demo-patient5-india',
@@ -156,7 +156,7 @@ async function getPatients(req: VercelRequest, res: VercelResponse) {
         counselorId: 'demo-counselor1-india',
         diagnosis: 'Tubal factor infertility',
         currentTreatment: 'Successful IVF - 12 weeks pregnant',
-        location: 'Kochi, Kerala'
+        location: 'Chennai, Tamil Nadu'
       }
     ]
 
