@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NotificationCenter from "./NotificationCenter";
 import {
   Card,
@@ -457,7 +457,11 @@ const Home = () => {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => navigate('/dashboard?tab=patients')}
+                >
                   View All Patients
                 </Button>
               </CardFooter>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useSearchParams } from 'react-router-dom';
 import {
   Card,
   CardContent,
@@ -74,6 +75,7 @@ interface RealtimeUpdate {
 }
 
 const RealTimeDashboard: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const [metrics, setMetrics] = useState<DashboardMetrics>({
     totalPatients: 0,
     activeInterventions: 0,
@@ -89,6 +91,9 @@ const RealTimeDashboard: React.FC = () => {
   const [realtimeUpdates, setRealtimeUpdates] = useState<RealtimeUpdate[]>([]);
   const [isConnected, setIsConnected] = useState(false);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+
+  // Get initial tab from URL parameters
+  const initialTab = searchParams.get('tab') || 'patients';
 
   useEffect(() => {
     // Initialize dashboard data
@@ -407,7 +412,7 @@ const RealTimeDashboard: React.FC = () => {
         </div>
 
         {/* Main Content */}
-        <Tabs defaultValue="patients" className="space-y-6">
+        <Tabs defaultValue={initialTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="patients">Patient Monitoring</TabsTrigger>
             <TabsTrigger value="updates">Live Updates</TabsTrigger>
