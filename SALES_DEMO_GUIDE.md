@@ -3,7 +3,6 @@
 ## 🚀 **Demo Environment Overview**
 
 **Production URL:** https://santana-ai-counselor-1s640ummk-satishs-projects-89f8c44c.vercel.app
-**Alternative URL (santaanvibe):** https://santaanvibe-282s6eavh-satishs-projects-89f8c44c.vercel.app *(pending Node.js fix)*
 
 **Target Market:** India - Fertility clinics and counseling centers
 **Demo Clinic:** Fertility Care Centre Mumbai
