@@ -2,7 +2,8 @@
 
 ## 🚀 **Demo Environment Overview**
 
-**Production URL:** https://santana-ai-counselor-7ep9bmjrt-satishs-projects-89f8c44c.vercel.app
+**Production URL:** https://santana-ai-counselor-1s640ummk-satishs-projects-89f8c44c.vercel.app
+**Alternative URL (santaanvibe):** https://santaanvibe-282s6eavh-satishs-projects-89f8c44c.vercel.app *(pending Node.js fix)*
 
 **Target Market:** India - Fertility clinics and counseling centers
 **Demo Clinic:** Fertility Care Centre Mumbai
@@ -222,7 +223,7 @@
 
 ## 🚀 **Ready to Start Demo!**
 
-**URL:** https://santana-ai-counselor-7ep9bmjrt-satishs-projects-89f8c44c.vercel.app
+**URL:** https://santana-ai-counselor-1s640ummk-satishs-projects-89f8c44c.vercel.app
 **Login:** demo.admin@fertilitycaremumbai.com / Demo@2024
 
 *This demo environment showcases real AI capabilities with authentic Indian patient scenarios for effective sales presentations.*
