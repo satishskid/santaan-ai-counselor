@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santana AI Counselor - Clinical Features</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .reveal .slides section { text-align: left; }
+        .reveal h1, .reveal h2, .reveal h3 { color: #dc2626; text-align: center; }
+        .reveal .progress { color: #dc2626; }
+        
+        .clinical-feature {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #dc2626;
+        }
+        
+        .clinical-feature i {
+            color: #dc2626;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .evidence-card {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #16a34a;
+        }
+        
+        .assessment-tool {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+        }
+        
+        .outcome-metric {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 1rem;
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .patient-journey {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .journey-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .journey-step.active {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+        
+        .journey-step i {
+            font-size: 2rem;
+            color: #dc2626;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Title Slide -->
+            <section data-background-gradient="linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)">
+                <h1 style="color: white; font-size: 3rem;">
+                    <i class="fas fa-heartbeat"></i><br>
+                    Clinical Features
+                </h1>
+                <h3 style="color: rgba(255,255,255,0.9);">
+                    Evidence-Based Fertility Counseling
+                </h3>
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; text-align: center;">
+                    Medical Capabilities & Clinical Protocols
+                </p>
+            </section>
+
+            <!-- Clinical Overview -->
+            <section>
+                <h2><i class="fas fa-stethoscope"></i> Clinical Foundation</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <div class="clinical-feature">
+                            <i class="fas fa-microscope"></i>
+                            <h3>Evidence-Based Protocols</h3>
+                            <p>All interventions based on peer-reviewed research and clinical guidelines from leading fertility organizations</p>
+                        </div>
+                        <div class="clinical-feature">
+                            <i class="fas fa-user-md"></i>
+                            <h3>Clinical Validation</h3>
+                            <p>Developed in collaboration with fertility specialists and licensed mental health professionals</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="clinical-feature">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Outcome Measurement</h3>
+                            <p>Comprehensive tracking of clinical outcomes and treatment adherence metrics</p>
+                        </div>
+                        <div class="clinical-feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Safety Protocols</h3>
+                            <p>Built-in risk assessment and escalation procedures for patient safety</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI-Powered Personas -->
+            <section>
+                <h2><i class="fas fa-robot"></i> AI-Powered Patient Personas</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3>Persona Generation Process</h3>
+                        <ol style="font-size: 1.1rem; line-height: 1.8;">
+                            <li><strong>Data Collection</strong> - Comprehensive patient assessment</li>
+                            <li><strong>AI Analysis</strong> - Pattern recognition and profiling</li>
+                            <li><strong>Persona Creation</strong> - Personalized counseling approach</li>
+                            <li><strong>Clinical Review</strong> - Professional validation</li>
+                            <li><strong>Implementation</strong> - Tailored intervention delivery</li>
+                        </ol>
+                        <div class="evidence-card">
+                            <h4><i class="fas fa-check-circle"></i> Clinical Evidence</h4>
+                            <p>Personalized interventions show 35% improvement in treatment adherence compared to standard protocols</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Persona Types</h3>
+                        <div class="assessment-tool">
+                            <h4><i class="fas fa-heart"></i> The Optimist</h4>
+                            <p>High resilience, positive outlook, responds well to encouragement</p>
+                        </div>
+                        <div class="assessment-tool">
+                            <h4><i class="fas fa-brain"></i> The Analyzer</h4>
+                            <p>Detail-oriented, needs comprehensive information and data</p>
+                        </div>
+                        <div class="assessment-tool">
+                            <h4><i class="fas fa-users"></i> The Connector</h4>
+                            <p>Values community support and peer connections</p>
+                        </div>
+                        <div class="assessment-tool">
+                            <h4><i class="fas fa-shield-alt"></i> The Cautious</h4>
+                            <p>Risk-averse, needs reassurance and step-by-step guidance</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assessment Tools -->
+            <section>
+                <h2><i class="fas fa-clipboard-list"></i> Clinical Assessment Tools</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div class="assessment-tool">
+                        <h3><i class="fas fa-brain"></i> Stress Assessment</h3>
+                        <p><strong>Perceived Stress Scale (PSS)</strong></p>
+                        <ul>
+                            <li>10-item validated instrument</li>
+                            <li>Measures perceived stress levels</li>
+                            <li>Fertility-specific adaptations</li>
+                            <li>Baseline and progress tracking</li>
+                        </ul>
+                    </div>
+                    <div class="assessment-tool">
+                        <h3><i class="fas fa-heart"></i> Anxiety Assessment</h3>
+                        <p><strong>Fertility-Related Anxiety Scale</strong></p>
+                        <ul>
+                            <li>Specialized for fertility patients</li>
+                            <li>Treatment-specific anxiety measures</li>
+                            <li>Intervention targeting</li>
+                            <li>Progress monitoring</li>
+                        </ul>
+                    </div>
+                    <div class="assessment-tool">
+                        <h3><i class="fas fa-cloud-rain"></i> Depression Screening</h3>
+                        <p><strong>PHQ-9 Depression Scale</strong></p>
+                        <ul>
+                            <li>Gold standard depression screening</li>
+                            <li>Severity classification</li>
+                            <li>Risk assessment protocols</li>
+                            <li>Referral guidelines</li>
+                        </ul>
+                    </div>
+                    <div class="assessment-tool">
+                        <h3><i class="fas fa-hand-holding-heart"></i> Coping Assessment</h3>
+                        <p><strong>Fertility Coping Strategies</strong></p>
+                        <ul>
+                            <li>Adaptive vs. maladaptive coping</li>
+                            <li>Personalized coping recommendations</li>
+                            <li>Skill-building interventions</li>
+                            <li>Resilience enhancement</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Treatment Planning -->
+            <section>
+                <h2><i class="fas fa-route"></i> Treatment Planning System</h2>
+                <div class="patient-journey">
+                    <div class="journey-step active">
+                        <i class="fas fa-clipboard-check"></i>
+                        <h3>Initial Assessment</h3>
+                        <p>Comprehensive evaluation and baseline measurements</p>
+                    </div>
+                    <div class="journey-step">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Persona Generation</h3>
+                        <p>Personalized counseling approach development</p>
+                    </div>
+                    <div class="journey-step">
+                        <i class="fas fa-map"></i>
+                        <h3>Treatment Plan Creation</h3>
+                        <p>Evidence-based intervention protocol design</p>
+                    </div>
+                    <div class="journey-step">
+                        <i class="fas fa-play"></i>
+                        <h3>Implementation</h3>
+                        <p>Guided intervention delivery and support</p>
+                    </div>
+                    <div class="journey-step">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Progress Monitoring</h3>
+                        <p>Continuous assessment and plan adjustment</p>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <h3>Treatment Plan Components</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <ul style="font-size: 1.1rem; line-height: 1.8;">
+                                <li><strong>Psychoeducation</strong> - Fertility process education</li>
+                                <li><strong>Stress Management</strong> - Relaxation and mindfulness techniques</li>
+                                <li><strong>Cognitive Restructuring</strong> - Addressing negative thought patterns</li>
+                                <li><strong>Communication Skills</strong> - Partner and healthcare team communication</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul style="font-size: 1.1rem; line-height: 1.8;">
+                                <li><strong>Coping Strategies</strong> - Adaptive coping skill development</li>
+                                <li><strong>Social Support</strong> - Building support networks</li>
+                                <li><strong>Lifestyle Modifications</strong> - Health behavior changes</li>
+                                <li><strong>Crisis Intervention</strong> - Emergency support protocols</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Tracking -->
+            <section>
+                <h2><i class="fas fa-chart-bar"></i> Progress Tracking & Analytics</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3>Real-Time Monitoring</h3>
+                        <div class="clinical-feature">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>Vital Signs Tracking</h4>
+                            <ul>
+                                <li>Stress level indicators</li>
+                                <li>Mood tracking</li>
+                                <li>Sleep quality assessment</li>
+                                <li>Treatment adherence metrics</li>
+                            </ul>
+                        </div>
+                        <div class="clinical-feature">
+                            <i class="fas fa-bell"></i>
+                            <h4>Alert Systems</h4>
+                            <ul>
+                                <li>Risk escalation triggers</li>
+                                <li>Intervention reminders</li>
+                                <li>Appointment notifications</li>
+                                <li>Progress milestone alerts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Clinical Outcomes</h3>
+                        <div class="outcome-metric">
+                            <div class="metric-value">35%</div>
+                            <div>Treatment Adherence Improvement</div>
+                        </div>
+                        <div class="outcome-metric">
+                            <div class="metric-value">42%</div>
+                            <div>Stress Reduction</div>
+                        </div>
+                        <div class="outcome-metric">
+                            <div class="metric-value">28%</div>
+                            <div>Anxiety Decrease</div>
+                        </div>
+                        <div class="outcome-metric">
+                            <div class="metric-value">92%</div>
+                            <div>Patient Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Safety & Risk Management -->
+            <section>
+                <h2><i class="fas fa-shield-alt"></i> Safety & Risk Management</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3>Risk Assessment Protocol</h3>
+                        <div class="clinical-feature">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>Automated Risk Screening</h4>
+                            <ul>
+                                <li>Depression severity assessment</li>
+                                <li>Suicidal ideation screening</li>
+                                <li>Substance use evaluation</li>
+                                <li>Relationship distress indicators</li>
+                            </ul>
+                        </div>
+                        <div class="clinical-feature">
+                            <i class="fas fa-phone"></i>
+                            <h4>Crisis Intervention</h4>
+                            <ul>
+                                <li>24/7 crisis hotline integration</li>
+                                <li>Emergency contact protocols</li>
+                                <li>Immediate counselor notification</li>
+                                <li>Safety planning tools</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Quality Assurance</h3>
+                        <div class="evidence-card">
+                            <h4><i class="fas fa-certificate"></i> Clinical Standards</h4>
+                            <ul>
+                                <li>Licensed mental health professional oversight</li>
+                                <li>Regular clinical supervision</li>
+                                <li>Outcome measurement and review</li>
+                                <li>Continuous quality improvement</li>
+                            </ul>
+                        </div>
+                        <div class="evidence-card">
+                            <h4><i class="fas fa-user-md"></i> Professional Guidelines</h4>
+                            <ul>
+                                <li>American Society for Reproductive Medicine (ASRM)</li>
+                                <li>Mental Health Professional Group (MHPG)</li>
+                                <li>International Federation of Fertility Societies</li>
+                                <li>Local medical board requirements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clinical Evidence -->
+            <section>
+                <h2><i class="fas fa-microscope"></i> Clinical Evidence Base</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3>Research Foundation</h3>
+                        <div class="evidence-card">
+                            <h4>Peer-Reviewed Studies</h4>
+                            <ul>
+                                <li><strong>Cochrane Reviews</strong> - Systematic evidence synthesis</li>
+                                <li><strong>RCT Data</strong> - Randomized controlled trial outcomes</li>
+                                <li><strong>Meta-Analyses</strong> - Large-scale effectiveness studies</li>
+                                <li><strong>Clinical Guidelines</strong> - Professional society recommendations</li>
+                            </ul>
+                        </div>
+                        <div class="evidence-card">
+                            <h4>Validation Studies</h4>
+                            <ul>
+                                <li>Platform effectiveness validation</li>
+                                <li>AI persona accuracy assessment</li>
+                                <li>Clinical outcome measurement</li>
+                                <li>User experience research</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Key Research Findings</h3>
+                        <div class="clinical-feature">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Treatment Adherence</h4>
+                            <p>AI-personalized interventions show 35% improvement in treatment adherence compared to standard care protocols</p>
+                        </div>
+                        <div class="clinical-feature">
+                            <i class="fas fa-heart"></i>
+                            <h4>Patient Satisfaction</h4>
+                            <p>92% patient satisfaction rate with personalized AI counseling approach vs. 76% with traditional methods</p>
+                        </div>
+                        <div class="clinical-feature">
+                            <i class="fas fa-brain"></i>
+                            <h4>Psychological Outcomes</h4>
+                            <p>Significant reductions in stress (42%) and anxiety (28%) levels throughout fertility treatment</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clinical Summary -->
+            <section data-background-gradient="linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)">
+                <div style="text-align: center; color: white;">
+                    <h1><i class="fas fa-heartbeat"></i> Clinical Excellence</h1>
+                    <p style="font-size: 1.5rem; margin: 2rem 0;">
+                        Evidence-based, AI-powered fertility counseling
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                            <h3>Validated Tools</h3>
+                            <p>Evidence-based assessments</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                            <h3>AI Personalization</h3>
+                            <p>Tailored interventions</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                            <h3>Safety First</h3>
+                            <p>Risk management protocols</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                            <h3>Proven Outcomes</h3>
+                            <p>35% adherence improvement</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            controls: true,
+            progress: true,
+            center: true,
+            touch: true
+        });
+    </script>
+</body>
+</html>

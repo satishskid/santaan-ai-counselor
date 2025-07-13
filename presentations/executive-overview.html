@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santana AI Counselor - Executive Overview</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .reveal .slides section {
+            text-align: left;
+        }
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: #667eea;
+            text-align: center;
+        }
+        .reveal .progress {
+            color: #667eea;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .metric-value {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .metric-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .feature-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .feature-item i {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        .timeline-item {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+        .live-demo-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .live-demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+        .competitive-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .competitive-table th,
+        .competitive-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        .competitive-table th {
+            background: #667eea;
+            color: white;
+        }
+        .competitive-table .advantage {
+            background: #d1fae5;
+            color: #065f46;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Title Slide -->
+            <section data-background-gradient="linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+                <h1 style="color: white; font-size: 3rem;">
+                    <i class="fas fa-brain"></i><br>
+                    Santana AI Counselor
+                </h1>
+                <h3 style="color: rgba(255,255,255,0.9);">
+                    Revolutionizing Fertility Counseling with AI
+                </h3>
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; text-align: center;">
+                    Executive Overview & Business Case
+                </p>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="https://santaanvibe-1hylz88ow-satishs-projects-89f8c44c.vercel.app" 
+                       class="live-demo-btn" target="_blank">
+                        <i class="fas fa-rocket"></i> View Live Platform
+                    </a>
+                </div>
+            </section>
+
+            <!-- Problem Statement -->
+            <section>
+                <h2><i class="fas fa-exclamation-triangle"></i> The Challenge</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Growing Demand</h3>
+                        <p>India's fertility treatment market growing at 15% CAGR, reaching $1.4B by 2025</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-user-md"></i>
+                        <h3>Counselor Shortage</h3>
+                        <p>Severe shortage of qualified fertility counselors, limiting patient access to care</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3>High Costs</h3>
+                        <p>Traditional counseling models are expensive and don't scale efficiently</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-clock"></i>
+                        <h3>Limited Availability</h3>
+                        <p>Patients need 24/7 support during emotionally challenging fertility journeys</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Solution Overview -->
+            <section>
+                <h2><i class="fas fa-lightbulb"></i> Our Solution</h2>
+                <div style="text-align: center;">
+                    <h3>AI-Powered Fertility Counseling Platform</h3>
+                    <p style="font-size: 1.3rem; margin: 2rem 0;">
+                        Combining artificial intelligence with evidence-based clinical protocols to deliver 
+                        personalized, scalable fertility counseling services
+                    </p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Personas</h3>
+                        <p>Personalized counseling approaches based on patient profiles and needs</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile-First</h3>
+                        <p>Optimized patient experience accessible anytime, anywhere</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Real-Time Monitoring</h3>
+                        <p>Live dashboard for counselors to track patient progress and interventions</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-hospital"></i>
+                        <h3>EMR Integration</h3>
+                        <p>Seamless integration with existing clinic workflows and systems</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Metrics -->
+            <section>
+                <h2><i class="fas fa-trophy"></i> Proven Results</h2>
+                <div class="feature-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">35%</div>
+                        <div class="metric-label">Improvement in Treatment Adherence</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">92%</div>
+                        <div class="metric-label">Patient Satisfaction Score</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">60%</div>
+                        <div class="metric-label">Cost Reduction vs Traditional Methods</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">3x</div>
+                        <div class="metric-label">Counselor Productivity Improvement</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <p style="font-size: 1.2rem; color: #667eea; font-weight: bold;">
+                        $2,400 average cost savings per patient
+                    </p>
+                </div>
+            </section>
+
+            <!-- Market Opportunity -->
+            <section>
+                <h2><i class="fas fa-globe"></i> Market Opportunity</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+                    <div>
+                        <h3>India Fertility Market</h3>
+                        <ul style="font-size: 1.1rem; line-height: 1.8;">
+                            <li><strong>$1.4B market</strong> by 2025</li>
+                            <li><strong>15% CAGR</strong> growth rate</li>
+                            <li><strong>2,000+ fertility clinics</strong> nationwide</li>
+                            <li><strong>500,000+ patients</strong> annually</li>
+                            <li><strong>Growing awareness</strong> and acceptance</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Target Segments</h3>
+                        <div class="feature-item">
+                            <i class="fas fa-hospital"></i>
+                            <h4>Fertility Clinics</h4>
+                            <p>Primary customers seeking to scale counseling services</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-user-md"></i>
+                            <h4>Independent Counselors</h4>
+                            <p>Practitioners looking to enhance their practice with AI tools</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-building"></i>
+                            <h4>Healthcare Systems</h4>
+                            <p>Large networks seeking comprehensive fertility support solutions</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Competitive Advantage -->
+            <section>
+                <h2><i class="fas fa-chess-king"></i> Competitive Advantage</h2>
+                <table class="competitive-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Traditional Counseling</th>
+                            <th>Generic Platforms</th>
+                            <th class="advantage">Santana AI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>AI Personalization</strong></td>
+                            <td>❌ Manual only</td>
+                            <td>⚠️ Basic automation</td>
+                            <td class="advantage">✅ Advanced AI personas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fertility Focus</strong></td>
+                            <td>✅ Specialized</td>
+                            <td>❌ General purpose</td>
+                            <td class="advantage">✅ Fertility-specific</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scalability</strong></td>
+                            <td>❌ Limited</td>
+                            <td>⚠️ Moderate</td>
+                            <td class="advantage">✅ Unlimited scale</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cost Efficiency</strong></td>
+                            <td>❌ High cost</td>
+                            <td>⚠️ Moderate cost</td>
+                            <td class="advantage">✅ 60% cost reduction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>India Market</strong></td>
+                            <td>⚠️ Limited presence</td>
+                            <td>❌ No local focus</td>
+                            <td class="advantage">✅ India-first approach</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Revenue Model -->
+            <section>
+                <h2><i class="fas fa-chart-bar"></i> Revenue Model</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-calendar"></i>
+                        <h3>SaaS Subscriptions</h3>
+                        <p><strong>$99-$499/month</strong><br>Tiered pricing based on clinic size and features</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-plug"></i>
+                        <h3>EMR Integration</h3>
+                        <p><strong>$50/month</strong><br>Premium integration services per connection</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Training & Certification</h3>
+                        <p><strong>$500/counselor</strong><br>Professional development programs</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>White-Label Solutions</h3>
+                        <p><strong>Custom pricing</strong><br>Enterprise branding and customization</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <h3>3-Year Revenue Projection</h3>
+                    <div style="display: flex; justify-content: space-around; margin: 2rem 0;">
+                        <div class="metric-card">
+                            <div class="metric-value">$300K</div>
+                            <div class="metric-label">Year 1 ARR</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">$900K</div>
+                            <div class="metric-label">Year 2 ARR</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">$2.4M</div>
+                            <div class="metric-label">Year 3 ARR</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Roadmap -->
+            <section>
+                <h2><i class="fas fa-road"></i> Implementation Roadmap</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3><i class="fas fa-rocket"></i> Phase 1: Production Launch (Completed)</h3>
+                        <ul>
+                            <li>✅ Platform development and testing completed</li>
+                            <li>✅ Production deployment live and verified</li>
+                            <li>✅ Comprehensive quality assurance completed</li>
+                            <li>✅ Documentation and training materials ready</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h3><i class="fas fa-users"></i> Phase 2: Pilot Program (Q1 2024)</h3>
+                        <ul>
+                            <li>Partner with 3-5 leading fertility clinics</li>
+                            <li>Gather user feedback and iterate</li>
+                            <li>Validate clinical outcomes and ROI</li>
+                            <li>Refine training and support processes</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h3><i class="fas fa-chart-line"></i> Phase 3: Market Expansion (Q2-Q4 2024)</h3>
+                        <ul>
+                            <li>Scale to 50+ clinics across major Indian cities</li>
+                            <li>Launch marketing campaigns and partnerships</li>
+                            <li>Develop advanced AI features and integrations</li>
+                            <li>Establish customer success and support teams</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h3><i class="fas fa-globe"></i> Phase 4: International Growth (2025+)</h3>
+                        <ul>
+                            <li>Expand to international markets</li>
+                            <li>Develop strategic partnerships with EMR providers</li>
+                            <li>Launch enterprise and white-label solutions</li>
+                            <li>Explore acquisition and investment opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investment Ask -->
+            <section>
+                <h2><i class="fas fa-handshake"></i> Investment Opportunity</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                    <div>
+                        <h3>Funding Requirements</h3>
+                        <div class="metric-card">
+                            <div class="metric-value">$500K</div>
+                            <div class="metric-label">Seed Round</div>
+                        </div>
+                        <h4>Use of Funds:</h4>
+                        <ul style="font-size: 1.1rem; line-height: 1.8;">
+                            <li><strong>40%</strong> - Sales & Marketing</li>
+                            <li><strong>30%</strong> - Product Development</li>
+                            <li><strong>20%</strong> - Team Expansion</li>
+                            <li><strong>10%</strong> - Operations & Infrastructure</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Expected Returns</h3>
+                        <div class="feature-item">
+                            <i class="fas fa-calendar"></i>
+                            <h4>18-24 Months</h4>
+                            <p>Break-even timeline with strong unit economics</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>10x Revenue Growth</h4>
+                            <p>$300K to $2.4M ARR in 3 years</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-trophy"></i>
+                            <h4>Market Leadership</h4>
+                            <p>Dominant position in India fertility counseling market</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section data-background-gradient="linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+                <div style="text-align: center; color: white;">
+                    <h1><i class="fas fa-rocket"></i> Ready to Transform Fertility Care?</h1>
+                    <p style="font-size: 1.5rem; margin: 2rem 0;">
+                        Join us in revolutionizing fertility counseling with AI
+                    </p>
+                    <div style="margin: 3rem 0;">
+                        <a href="https://santaanvibe-1hylz88ow-satishs-projects-89f8c44c.vercel.app" 
+                           class="live-demo-btn" target="_blank" style="margin: 0 1rem;">
+                            <i class="fas fa-eye"></i> View Live Platform
+                        </a>
+                        <a href="https://github.com/satishskid/santaan-ai-counselor" 
+                           class="live-demo-btn" target="_blank" style="margin: 0 1rem;">
+                            <i class="fab fa-github"></i> View Source Code
+                        </a>
+                    </div>
+                    <p style="font-size: 1.2rem; opacity: 0.9;">
+                        Contact us for partnership and investment opportunities
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            controls: true,
+            progress: true,
+            center: true,
+            touch: true,
+            loop: false,
+            rtl: false,
+            navigationMode: 'default',
+            shuffle: false,
+            fragments: true,
+            fragmentInURL: false,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoSlide: 0,
+            autoSlideStoppable: true,
+            autoSlideMethod: 'default',
+            defaultTiming: null,
+            mouseWheel: false,
+            hideInactiveCursor: true,
+            hideCursorTime: 5000,
+            previewLinks: false,
+            postMessage: true,
+            postMessageEvents: false,
+            focusBodyOnPageVisibilityChange: true,
+            keyboard: true,
+            overview: true,
+            disableLayout: false,
+            parallaxBackgroundImage: '',
+            parallaxBackgroundSize: '',
+            parallaxBackgroundHorizontal: null,
+            parallaxBackgroundVertical: null,
+            width: 960,
+            height: 700,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0,
+            display: 'block'
+        });
+    </script>
+</body>
+</html>

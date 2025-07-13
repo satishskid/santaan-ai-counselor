@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santana AI Counselor - Interactive Presentations Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .live-status {
+            display: inline-flex;
+            align-items: center;
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .live-status i {
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .quick-link {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .quick-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-link i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .quick-link h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .quick-link p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .presentations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .presentation-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .presentation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+        }
+
+        .card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list li i {
+            color: #10b981;
+            margin-right: 0.5rem;
+            width: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem 0;
+            color: white;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .git-info {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .git-info h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .git-link {
+            display: inline-flex;
+            align-items: center;
+            background: #24292e;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .git-link:hover {
+            background: #1a1e22;
+            transform: translateY(-2px);
+        }
+
+        .git-link i {
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .presentations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-brain"></i> Santana AI Counselor</h1>
+        <p>Interactive Presentations & Documentation Hub</p>
+        <div class="live-status">
+            <i class="fas fa-circle"></i>
+            Production Ready & Live
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Quick Access Links -->
+        <div class="quick-links">
+            <a href="https://santaanvibe-1hylz88ow-satishs-projects-89f8c44c.vercel.app" class="quick-link" target="_blank">
+                <i class="fas fa-rocket"></i>
+                <h3>Live Application</h3>
+                <p>Access the production Santana AI Counselor platform</p>
+            </a>
+
+            <a href="https://santaanvibe-1hylz88ow-satishs-projects-89f8c44c.vercel.app/dashboard" class="quick-link" target="_blank">
+                <i class="fas fa-chart-line"></i>
+                <h3>Real-Time Dashboard</h3>
+                <p>Monitor patient progress and interventions live</p>
+            </a>
+
+            <a href="https://santaanvibe-1hylz88ow-satishs-projects-89f8c44c.vercel.app/patient-app" class="quick-link" target="_blank">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Patient Mobile App</h3>
+                <p>Mobile-optimized patient experience interface</p>
+            </a>
+
+            <a href="https://santaanvibe-1hylz88ow-satishs-projects-89f8c44c.vercel.app/admin" class="quick-link" target="_blank">
+                <i class="fas fa-cogs"></i>
+                <h3>Admin Dashboard</h3>
+                <p>Administrative controls and system management</p>
+            </a>
+        </div>
+
+        <!-- Git Repository Information -->
+        <div class="git-info">
+            <h3><i class="fab fa-github"></i> Source Code Repository</h3>
+            <a href="https://github.com/satishskid/santaan-ai-counselor" class="git-link" target="_blank">
+                <i class="fab fa-github"></i>
+                View on GitHub
+            </a>
+            <p style="margin-top: 1rem; color: #666;">
+                Complete source code, documentation, and development resources
+            </p>
+        </div>
+
+        <!-- Interactive Presentations -->
+        <h2 class="section-title">📊 Interactive Presentations</h2>
+
+        <div class="presentations-grid">
+            <!-- Executive Overview Presentation -->
+            <div class="presentation-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-pie"></i> Executive Overview</h3>
+                    <p>Complete platform overview for leadership</p>
+                </div>
+                <div class="card-content">
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Business value proposition</li>
+                        <li><i class="fas fa-check"></i> Market opportunity analysis</li>
+                        <li><i class="fas fa-check"></i> Financial projections & ROI</li>
+                        <li><i class="fas fa-check"></i> Competitive advantages</li>
+                        <li><i class="fas fa-check"></i> Implementation roadmap</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="./executive-overview.html" class="btn btn-primary">
+                            <i class="fas fa-play"></i> View Presentation
+                        </a>
+                        <a href="./executive-overview.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Architecture Presentation -->
+            <div class="presentation-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-code"></i> Technical Architecture</h3>
+                    <p>Deep dive into system design and implementation</p>
+                </div>
+                <div class="card-content">
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> System architecture overview</li>
+                        <li><i class="fas fa-check"></i> Technology stack details</li>
+                        <li><i class="fas fa-check"></i> Database design & APIs</li>
+                        <li><i class="fas fa-check"></i> Security & compliance</li>
+                        <li><i class="fas fa-check"></i> Deployment & scaling</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="./technical-architecture.html" class="btn btn-primary">
+                            <i class="fas fa-play"></i> View Presentation
+                        </a>
+                        <a href="./technical-architecture.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clinical Features Presentation -->
+            <div class="presentation-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-heartbeat"></i> Clinical Features</h3>
+                    <p>Medical capabilities and evidence-based protocols</p>
+                </div>
+                <div class="card-content">
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> AI-powered patient personas</li>
+                        <li><i class="fas fa-check"></i> Assessment tools & protocols</li>
+                        <li><i class="fas fa-check"></i> Treatment planning system</li>
+                        <li><i class="fas fa-check"></i> Progress tracking & analytics</li>
+                        <li><i class="fas fa-check"></i> Clinical evidence & outcomes</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="./clinical-features.html" class="btn btn-primary">
+                            <i class="fas fa-play"></i> View Presentation
+                        </a>
+                        <a href="./clinical-features.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Analysis Presentation -->
+            <div class="presentation-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-globe"></i> Market Analysis</h3>
+                    <p>Market opportunity and competitive landscape</p>
+                </div>
+                <div class="card-content">
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> India fertility market size</li>
+                        <li><i class="fas fa-check"></i> Target customer segments</li>
+                        <li><i class="fas fa-check"></i> Competitive analysis</li>
+                        <li><i class="fas fa-check"></i> Go-to-market strategy</li>
+                        <li><i class="fas fa-check"></i> Growth projections</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="./market-analysis.html" class="btn btn-primary">
+                            <i class="fas fa-play"></i> View Presentation
+                        </a>
+                        <a href="./market-analysis.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Projections Presentation -->
+            <div class="presentation-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-bar"></i> Financial Projections</h3>
+                    <p>Revenue models, costs, and investment analysis</p>
+                </div>
+                <div class="card-content">
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Revenue model breakdown</li>
+                        <li><i class="fas fa-check"></i> Cost structure analysis</li>
+                        <li><i class="fas fa-check"></i> 3-year financial projections</li>
+                        <li><i class="fas fa-check"></i> ROI & break-even analysis</li>
+                        <li><i class="fas fa-check"></i> Investment requirements</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="./financial-projections.html" class="btn btn-primary">
+                            <i class="fas fa-play"></i> View Presentation
+                        </a>
+                        <a href="./financial-projections.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Guide Presentation -->
+            <div class="presentation-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-tasks"></i> Implementation Guide</h3>
+                    <p>Step-by-step deployment and training guide</p>
+                </div>
+                <div class="card-content">
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Deployment checklist</li>
+                        <li><i class="fas fa-check"></i> Staff training programs</li>
+                        <li><i class="fas fa-check"></i> Integration procedures</li>
+                        <li><i class="fas fa-check"></i> Quality assurance protocols</li>
+                        <li><i class="fas fa-check"></i> Support & maintenance</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="./implementation-guide.html" class="btn btn-primary">
+                            <i class="fas fa-play"></i> View Presentation
+                        </a>
+                        <a href="./implementation-guide.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentation Links -->
+        <h2 class="section-title">📚 Documentation Resources</h2>
+
+        <div class="quick-links">
+            <a href="../GITHUB_DOCUMENTATION_HUB.md" class="quick-link">
+                <i class="fas fa-book"></i>
+                <h3>Complete Documentation Hub</h3>
+                <p>Comprehensive training materials and resources</p>
+            </a>
+
+            <a href="../README.md" class="quick-link">
+                <i class="fas fa-info-circle"></i>
+                <h3>Platform Overview</h3>
+                <p>Technical specifications and getting started guide</p>
+            </a>
+
+            <a href="../SYSTEMATIC_TESTING_PROTOCOL.md" class="quick-link">
+                <i class="fas fa-vial"></i>
+                <h3>Testing Protocols</h3>
+                <p>Quality assurance and testing methodologies</p>
+            </a>
+
+            <a href="../COMPREHENSIVE_BUTTON_NAVIGATION_AUDIT.md" class="quick-link">
+                <i class="fas fa-check-double"></i>
+                <h3>Functionality Audit</h3>
+                <p>Complete button and navigation verification</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling and interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all presentation cards
+            document.querySelectorAll('.presentation-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Add click tracking for analytics
+            document.querySelectorAll('.btn, .quick-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    console.log('Link clicked:', this.href || this.textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
