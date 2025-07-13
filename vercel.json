@@ -4,6 +4,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install && npx prisma generate",
+  "nodeVersion": "18.x",
   "functions": {
     "api/**/*.ts": {
       "runtime": "@vercel/node@3.0.7"
