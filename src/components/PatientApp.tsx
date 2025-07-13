@@ -282,9 +282,9 @@ const PatientApp: React.FC<{ patientId?: string }> = ({ patientId: propPatientId
     // Mock patient data - in production, this would come from your API
     const mockPatientData: PatientData = {
       id: patientId,
-      firstName: 'Sarah',
-      lastName: 'Johnson',
-      email: 'sarah.johnson@email.com',
+      firstName: 'Kavya',
+      lastName: 'Reddy',
+      email: 'kavya.reddy@email.com',
       avatar: '/api/placeholder/150/150',
       currentCycle: {
         cycleNumber: 2,
@@ -516,7 +516,7 @@ const PatientApp: React.FC<{ patientId?: string }> = ({ patientId: propPatientId
           type: 'medical',
           date: '2024-01-18',
           time: '10:00 AM',
-          provider: 'Dr. Sarah Williams',
+          provider: 'Dr. Priya Sharma',
           location: 'Fertility Center - Ultrasound Suite',
           status: 'scheduled',
         },
