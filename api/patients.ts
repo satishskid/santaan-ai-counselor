@@ -233,9 +233,9 @@ async function getPatient(req: VercelRequest, res: VercelResponse, id: string) {
     // Return mock patient data based on ID
     const mockPatient = {
       id,
-      firstName: 'Sarah',
-      lastName: 'Johnson',
-      email: 'sarah.johnson@email.com',
+      firstName: 'Kavya',
+      lastName: 'Reddy',
+      email: 'kavya.reddy@email.com',
       phone: '+1-555-0123',
       dateOfBirth: '1985-03-15',
       status: 'ACTIVE',

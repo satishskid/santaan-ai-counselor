@@ -388,9 +388,9 @@ async function getAppointments(req: VercelRequest, res: VercelResponse) {
         location: 'Room 101',
         isVirtual: false,
         patient: {
-          firstName: 'Sarah',
-          lastName: 'Johnson',
-          email: 'sarah.johnson@email.com'
+          firstName: 'Kavya',
+          lastName: 'Reddy',
+          email: 'kavya.reddy@email.com'
         }
       },
       {
