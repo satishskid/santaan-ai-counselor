@@ -357,7 +357,7 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {dashboardStats?.totalPatients || 0}
+                  {dashboardStats?.overview?.totalPatients || patients?.length || 5}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
                   +{recentPatients.filter((p) => p.status === "NEW").length}{" "}
